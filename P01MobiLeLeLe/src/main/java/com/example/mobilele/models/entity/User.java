@@ -24,19 +24,19 @@ public class User extends BaseEntity{
     @Column(nullable = false, name = "last_name")
     private String lastName;
 
-    @Column(nullable = false, name = "is_active")
+    @Column(name = "is_active")
     private boolean isActive;
 
     @ManyToOne
     private UserRole role;
 
-    @Column(nullable = false, name = "image_url")
+    @Column( name = "image_url")
     private String imageUrl;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime created;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime modified;
 
 }
