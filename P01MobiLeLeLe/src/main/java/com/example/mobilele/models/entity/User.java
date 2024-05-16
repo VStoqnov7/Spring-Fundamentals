@@ -27,7 +27,7 @@ public class User extends BaseEntity{
     @Column(name = "is_active")
     private boolean isActive;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private UserRole role;
 
     @Column( name = "image_url")
