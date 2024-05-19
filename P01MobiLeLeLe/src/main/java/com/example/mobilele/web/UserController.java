@@ -20,18 +20,14 @@ public class UserController {
     @PostMapping("/register")
     public ModelAndView postRegister(ModelAndView model, UserDto userDto){
         boolean isRegistered = userService.saveUser(userDto);
-        if (isRegistered) {
-            model.setViewName("redirect:/");
-        }else {
-            model.setViewName("/auth-register");
-        }
+        model.setViewName(isRegistered ? "redirect:/" : "/auth-register");
         return model;
     }
 
-//    @PostMapping("/login")
-//    public ModelAndView postLogin(ModelAndView model, UserDto userDto){
-//        this.userService.checkUser(userDto);
-////        if ()
-//
-//    }
+    @PostMapping("/login")
+    public ModelAndView postLogin(ModelAndView model, UserDto userDto){
+        boolean isLogged = this.userService.checkUser(userDto);
+        model.setViewName(isLogged ? "redirect:/" : "/auth-login");
+        return model;
+    }
 }

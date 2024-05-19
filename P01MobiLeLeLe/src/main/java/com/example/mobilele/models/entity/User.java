@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 public class User extends BaseEntity{
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -30,7 +30,7 @@ public class User extends BaseEntity{
     @ManyToOne(cascade = CascadeType.ALL)
     private UserRole role;
 
-    @Column( name = "image_url")
+    @Column(name = "image_url")
     private String imageUrl;
 
     @Column
