@@ -20,15 +20,15 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto col-12 justify-content-between">
-                <li class="nav-item"
-                    >
+            <ul class="navbar-nav mr-auto col-12 justify-content-end">
+                <li class="nav-item" th:if="${isActive}"
+                >
                     <a class="nav-link" href="/brands/all">All Brands</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${isActive}">
                     <a class="nav-link" href="/offers/add">Add Offer</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${isActive} ">
                     <a class="nav-link" href="/offers/all">All Offers</a>
                 </li>
                 <li class="nav-item dropdown" th:if="${isActive}">
@@ -50,18 +50,17 @@
                         <a class="nav-link" href="/logout">Logout</a>
                     </div>
                 </li>
-                
-                    <li class="nav-item" >
-                        <a class="nav-link" href="/register">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                
+
+                <li class="nav-item" th:unless="${isActive}">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+                <li class="nav-item" th:unless="${isActive}">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+
             </ul>
         </div>
     </nav>
-
 </div>
 
 <div class="container">
@@ -86,10 +85,10 @@
             Invalid username or password.
         </p>
 
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col col-md-4">
-                <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Submit Offer"/>
+                <div class="button-holder d-flex justify-content-center">
+                    <input type="submit" class="btn btn-info btn-lg" value="Submit"/>
                 </div>
             </div>
         </div>

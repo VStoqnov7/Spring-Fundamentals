@@ -30,20 +30,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
+    public boolean saveUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         UserRole userRole = new UserRole();
+        userRole.setName(this.userRepository.count() > 0 ? Role.USER : Role.ADMIN);
         if (validator.isValid(userDto)) {
-            if (userDto.getRole().equals("ADMIN")) {
-                userRole.setName(Role.ADMIN);
-            } else {
-                userRole.setName(Role.USER);
-            }
             user.setCreated(LocalDateTime.now());
             user.setRole(userRole);
             this.userRepository.saveAndFlush(user);
+            return true;
         } else {
             validator.validate(userDto).forEach(System.out::println);
+            return false;
         }
     }
 }

@@ -21,6 +21,4 @@ public class UserDto {
     @NotEmpty
     private String lastName;
     private boolean isActive;
-    @NotNull
-    private String role;
 }
