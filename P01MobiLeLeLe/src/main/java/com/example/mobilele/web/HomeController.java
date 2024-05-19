@@ -1,5 +1,6 @@
 package com.example.mobilele.web;
 
+import com.example.mobilele.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class HomeController {
 
+    private final UserService userService;
+
+    public HomeController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping
     public ModelAndView getHome(ModelAndView model) {
         model.setViewName("index");
+
         return model;
     }
 

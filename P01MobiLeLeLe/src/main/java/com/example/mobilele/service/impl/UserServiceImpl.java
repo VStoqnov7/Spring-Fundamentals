@@ -1,5 +1,6 @@
 package com.example.mobilele.service.impl;
 
+import com.example.mobilele.models.beans.LoggedUser;
 import com.example.mobilele.models.dto.UserDto;
 import com.example.mobilele.models.entity.User;
 import com.example.mobilele.models.entity.UserRole;
@@ -20,13 +21,15 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     private final MyValidator validator;
     private final PasswordEncoder passwordEncoder;
+    private final LoggedUser loggedUser;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, MyValidator validator, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, MyValidator validator, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.validator = validator;
         this.passwordEncoder = passwordEncoder;
+        this.loggedUser = loggedUser;
     }
 
     @Override
@@ -47,11 +50,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkUser(UserDto userDto) {
+    public boolean checkUserLogin(UserDto userDto) {
         User existingUser = userRepository.findByUsername(userDto.getUsername());
         if (existingUser != null && passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())){
             existingUser.setActive(true);
             this.userRepository.saveAndFlush(existingUser);
+            this.loggedUser
+                    .setId(existingUser.getId())
+                    .setUsername(existingUser.getUsername())
+                    .setRole(existingUser.getRole().getName());
             return true;
         }else {
             return false;

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/")
 public class UserController {
@@ -25,8 +27,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ModelAndView postLogin(ModelAndView model, UserDto userDto){
-        boolean isLogged = this.userService.checkUser(userDto);
+    public ModelAndView postLogin(ModelAndView model, UserDto userDto, HttpSession session){
+        boolean isLogged = this.userService.checkUserLogin(userDto);
         model.setViewName(isLogged ? "redirect:/" : "/auth-login");
         return model;
     }
