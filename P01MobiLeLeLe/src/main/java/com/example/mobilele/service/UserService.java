@@ -6,6 +6,8 @@ public interface UserService {
     boolean saveUser(UserDto userDto);
 
     boolean checkUserLogin(UserDto userDto);
+
+    void logout();
 }
 
 

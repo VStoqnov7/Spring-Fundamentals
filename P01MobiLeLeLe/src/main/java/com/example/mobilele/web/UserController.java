@@ -3,6 +3,7 @@ package com.example.mobilele.web;
 import com.example.mobilele.models.dto.UserDto;
 import com.example.mobilele.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,6 +31,13 @@ public class UserController {
     public ModelAndView postLogin(ModelAndView model, UserDto userDto, HttpSession session){
         boolean isLogged = this.userService.checkUserLogin(userDto);
         model.setViewName(isLogged ? "redirect:/" : "/auth-login");
+        return model;
+    }
+
+    @PostMapping("/logout")
+    public ModelAndView postLogout(ModelAndView model) {
+        this.userService.logout();
+        model.setViewName("redirect:/");
         return model;
     }
 }

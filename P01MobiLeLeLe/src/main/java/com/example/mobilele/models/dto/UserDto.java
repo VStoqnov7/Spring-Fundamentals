@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 public class UserDto {
+    @NotNull
+    @NotEmpty
     private String username;
     @NotNull
     @NotEmpty
@@ -20,5 +22,4 @@ public class UserDto {
     @NotNull
     @NotEmpty
     private String lastName;
-    private boolean isActive;
 }

@@ -64,4 +64,12 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
+
+    @Override
+    public void logout() {
+        User existingUser = userRepository.findByUsername(loggedUser.getUsername());
+        existingUser.setActive(false);
+        this.userRepository.saveAndFlush(existingUser);
+        this.loggedUser.clearFields();
+    }
 }
