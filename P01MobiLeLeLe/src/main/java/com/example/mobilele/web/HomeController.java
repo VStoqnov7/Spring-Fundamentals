@@ -43,6 +43,8 @@ public class HomeController {
 
     @GetMapping("/brands/all")
     public ModelAndView allBrands(ModelAndView model){
+        boolean areImported = !this.userService.areImported();
+        model.addObject("areImported", areImported);
         model.setViewName("brands");
         return model;
     }

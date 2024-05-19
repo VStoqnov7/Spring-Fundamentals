@@ -2,6 +2,7 @@ package com.example.mobilele.service.impl;
 
 import com.example.mobilele.models.beans.LoggedUser;
 import com.example.mobilele.models.dto.UserDto;
+import com.example.mobilele.models.dto.UserLoginDto;
 import com.example.mobilele.models.entity.User;
 import com.example.mobilele.models.entity.UserRole;
 import com.example.mobilele.models.enums.Role;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean saveUser(UserDto userDto) {
+    public void saveUser(UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
         UserRole userRole = new UserRole();
         userRole.setName(this.userRepository.count() > 0 ? Role.USER : Role.ADMIN);
@@ -42,15 +43,13 @@ public class UserServiceImpl implements UserService {
             user.setRole(userRole);
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             this.userRepository.saveAndFlush(user);
-            return true;
         } else {
             validator.validate(userDto).forEach(System.out::println);
-            return false;
         }
     }
 
     @Override
-    public boolean checkUserLogin(UserDto userDto) {
+    public boolean checkUserLogin(UserLoginDto userDto) {
         User existingUser = userRepository.findByUsername(userDto.getUsername());
         if (existingUser != null && passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())){
             existingUser.setActive(true);
@@ -71,5 +70,10 @@ public class UserServiceImpl implements UserService {
         existingUser.setActive(false);
         this.userRepository.saveAndFlush(existingUser);
         this.loggedUser.clearFields();
+    }
+
+    @Override
+    public boolean areImported() {
+        return this.userRepository.count() > 0;
     }
 }

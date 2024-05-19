@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Table(name = "brands")
 public class Brand extends BaseEntity{
 
-
     @Column(nullable = false)
     private String name;
 

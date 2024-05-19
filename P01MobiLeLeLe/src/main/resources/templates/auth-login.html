@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="~{/fragments/head}">
 </head>
 <body>
@@ -25,8 +26,8 @@
                    placeholder="Password"/>
 
         </div>
-        
-        <p class="errors alert alert-danger">
+
+        <p class="errors alert alert-danger" th:if="${invalidUsernameOrPassword}">
             Invalid username or password.
         </p>
 
