@@ -15,13 +15,13 @@ public class HomeController {
         return model;
     }
 
-    @GetMapping("/users/login")
+    @GetMapping("/login")
     public ModelAndView login(ModelAndView model){
         model.setViewName("auth-login");
         return model;
     }
 
-    @GetMapping("/users/register")
+    @GetMapping("/register")
     public ModelAndView register(ModelAndView model){
         model.setViewName("auth-register");
         return model;
