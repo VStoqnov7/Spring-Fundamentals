@@ -12,6 +12,7 @@ public interface UserService {
 
     boolean areImported();
 
+    boolean existUser(UserDto userDto);
 }
 
 

@@ -2,6 +2,7 @@ package com.example.mobilele.models.beans;
 
 import com.example.mobilele.models.enums.Role;
 
+
 public class LoggedUser {
 
     private String id;

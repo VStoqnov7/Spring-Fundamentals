@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -24,43 +25,41 @@ public class UserController {
 
     @PostMapping("/register")
     public ModelAndView postRegister(ModelAndView model, @Valid UserDto userDto, BindingResult bindingResult){
+        boolean existUser = this.userService.existUser(userDto);
+
         if (bindingResult.hasFieldErrors("firstName")) {
             model.addObject("invalidFirstName", true);
         }
         if (bindingResult.hasFieldErrors("lastName")) {
             model.addObject("invalidLastName", true);
         }
-        if (bindingResult.hasFieldErrors("username")) {
+        if (bindingResult.hasFieldErrors("username") || existUser) {
             model.addObject("invalidUserName", true);
         }
         if (bindingResult.hasFieldErrors("password")) {
             model.addObject("invalidPassword", true);
         }
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || existUser) {
             model.setViewName("/auth-register");
             return model;
         }
-
-        model.addObject("showFirstName", false);
-        model.addObject("showLastName", false);
-        model.addObject("showUserName", false);
-        model.addObject("showPassword", false);
         userService.saveUser(userDto);
         model.setViewName("redirect:/");
         return model;
     }
 
     @PostMapping("/login")
-    public ModelAndView postLogin(ModelAndView model, @Valid UserLoginDto userLoginDto, BindingResult bindingResult){
+    public ModelAndView postLogin(ModelAndView model, @Valid UserLoginDto userLoginDto, BindingResult bindingResult, HttpSession session){
         boolean isLogged = this.userService.checkUserLogin(userLoginDto);
         if (bindingResult.hasErrors() || !isLogged){
             model.addObject("invalidUsernameOrPassword", true);
             model.setViewName("/auth-login");
             return model;
         }
+        session.setAttribute("user", userLoginDto);
         model.addObject("invalidUsernameOrPassword", false);
-        model.setViewName(isLogged ? "redirect:/" : "/auth-login");
+        model.setViewName("redirect:/");
         return model;
     }
 

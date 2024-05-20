@@ -20,7 +20,6 @@ public class Brand extends BaseEntity{
     @Column(nullable = false)
     private LocalDateTime created;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime modified;
-
 }

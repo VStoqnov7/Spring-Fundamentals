@@ -24,18 +24,18 @@ public class Model extends BaseEntity{
     @Column(nullable = false,name = "image_url")
     private String imageUrl;
 
-    @Column(nullable = false,name = "start_year")
+    @Column(name = "start_year")
     private int startYear;
 
-    @Column(name = "end_year", nullable = false)
+    @Column(name = "end_year")
     private int endYear;
 
     @Column(nullable = false)
     private LocalDateTime created;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime modified;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Brand brand;
 }

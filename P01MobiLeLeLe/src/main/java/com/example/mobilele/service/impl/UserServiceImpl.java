@@ -45,13 +45,14 @@ public class UserServiceImpl implements UserService {
             this.userRepository.saveAndFlush(user);
         } else {
             validator.validate(userDto).forEach(System.out::println);
+
         }
     }
 
     @Override
     public boolean checkUserLogin(UserLoginDto userDto) {
         User existingUser = userRepository.findByUsername(userDto.getUsername());
-        if (existingUser != null && passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())){
+        if (existingUser != null && passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())) {
             existingUser.setActive(true);
             this.userRepository.saveAndFlush(existingUser);
             this.loggedUser
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
                     .setUsername(existingUser.getUsername())
                     .setRole(existingUser.getRole().getName());
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -75,5 +76,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean areImported() {
         return this.userRepository.count() > 0;
+    }
+
+    @Override
+    public boolean existUser(UserDto userDto) {
+        return userRepository.findByUsername(userDto.getUsername()) != null;
     }
 }

@@ -22,7 +22,7 @@ public class Offer extends BaseEntity{
     @Column(nullable = false)
     private Engine engine;
 
-    @Column(nullable = false,name = "image_url")
+    @Column(nullable = false, name = "image_url")
     private String imageUrl;
 
     @Column(nullable = false)
@@ -41,12 +41,12 @@ public class Offer extends BaseEntity{
     @Column(nullable = false)
     private LocalDateTime created;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime modified;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Model model;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User seller;
 }
