@@ -61,7 +61,7 @@ public class OfferController {
         }
 
         this.offerService.addOffer(offerDto, (UserLoginDto) session.getAttribute("user"));
-        model.setViewName("/brands");
+        model.setViewName("redirect:/brands/all");
         return model;
     }
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -22,4 +23,7 @@ public class Brand extends BaseEntity{
 
     @Column
     private LocalDateTime modified;
+
+    @OneToMany(mappedBy = "brand")
+    private List<Model> models;
 }

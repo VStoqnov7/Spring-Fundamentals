@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -47,7 +48,5 @@ public class OfferServiceImpl implements OfferService {
         User user = this.userRepository.findByUsername(userLoginDto.getUsername());
         offer.setSeller(user);
         this.offerRepository.saveAndFlush(offer);
-        System.out.println(offer);
-
     }
 }
