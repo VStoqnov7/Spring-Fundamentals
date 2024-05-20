@@ -22,22 +22,22 @@
             </div>
             <ul class="offer-details list-group list-group-flush">
                 <li class="list-group-item">
-                    <div class="card-text"><span>• Mileage</span></div>
-                    <div class="card-text"><span>• Price</span></div>
-                    <div class="card-text"><span>• Engine type</span></div>
-                    <div class="card-text"><span>• Transmission type</span></div>
-                    <div class="card-text"><span>• Offer created</span></div>
-                    <div class="card-text"><span>• Offer modified</span></div>
-                    <div class="card-text"><span>• Seller - First and Last name</span></div>
+                    <div class="card-text"><span th:text="'• Mileage: ' + ${offer.mileage}">• Mileage</span></div>
+                    <div class="card-text"><span th:text="'• Price: ' + ${offer.price}">• Price</span></div>
+                    <div class="card-text"><span th:text="'• Engine type: ' + ${offer.engine.name}">• Engine type</span></div>
+                    <div class="card-text"><span th:text="'• Transmission type: ' + ${offer.transmission.name}">• Transmission type</span></div>
+                    <div class="card-text"><span th:text="'• Offer created:' + ${offer.created}">• Offer created</span></div>
+                    <div class="card-text"><span th:text="'• Offer modified:' + ${offer.modified}">• Offer modified</span></div>
+                    <div class="card-text"><span th:text="'• Seller:' + ${offer.seller.firstName} + ${offer.seller.lastName}">• Seller - First and Last name</span></div>
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" href="/">Update</a>
-                <a class="card-link" href="/">Delete</a>
+                <a class="card-link" th:href="@{'/offers/update/' + ${offer.seller.id} + '/' + ${offer.id}}" >Update</a>
+                <a class="card-link" th:href="@{/}">Delete</a>
             </div>
         </div>
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
-            <img src="/" class="card-img-top"  alt="Car image">
+            <td><img th:src="@{'/img/' + ${offer.imageUrl}}"/></td>
         </div>
     </div>
 </div>

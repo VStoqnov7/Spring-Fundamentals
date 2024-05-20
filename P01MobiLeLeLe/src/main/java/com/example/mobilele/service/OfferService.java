@@ -9,4 +9,9 @@ import java.util.List;
 public interface OfferService {
     void addOffer(OfferDto offerDto, UserLoginDto userLoginDto);
 
+    List<Offer> getAllOffers();
+
+    Offer getOfferById(String id);
+
+    void updateOffer(OfferDto updatedOfferDto, String offerId);
 }

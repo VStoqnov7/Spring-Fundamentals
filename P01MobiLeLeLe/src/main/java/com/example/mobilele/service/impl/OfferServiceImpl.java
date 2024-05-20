@@ -14,8 +14,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -49,4 +51,51 @@ public class OfferServiceImpl implements OfferService {
         offer.setSeller(user);
         this.offerRepository.saveAndFlush(offer);
     }
+
+    @Override
+    public List<Offer> getAllOffers() {
+        return this.offerRepository.findAll();
+    }
+
+    @Override
+    public Offer getOfferById(String id) {
+        return this.offerRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void updateOffer(OfferDto updatedOfferDto, String offerId) {
+        Optional<Offer> existingOfferOptional = this.offerRepository.findById(offerId);
+
+        if (!existingOfferOptional.isPresent()) {
+            throw new EntityNotFoundException("Offer not found with id: " + offerId);
+        }
+
+        Offer offerToUpdate = existingOfferOptional.get();
+
+        offerToUpdate.setDescription(updatedOfferDto.getDescription());
+        offerToUpdate.setPrice(updatedOfferDto.getPrice());
+        offerToUpdate.setImageUrl(updatedOfferDto.getImageUrl());
+        offerToUpdate.setModified(LocalDateTime.now());
+
+        Brand brand = offerToUpdate.getModel().getBrand();
+        if (brand == null) {
+            brand = new Brand();
+            offerToUpdate.getModel().setBrand(brand);
+        }
+        brand.setName(updatedOfferDto.getBrand());
+        brand.setCreated(LocalDateTime.now());
+
+        Model model = offerToUpdate.getModel();
+        if (model == null) {
+            model = new Model();
+            offerToUpdate.setModel(model);
+        }
+        model.setName(updatedOfferDto.getModel());
+        model.setCreated(LocalDateTime.now());
+        model.setImageUrl(updatedOfferDto.getImageUrl());
+        model.setCategory(Category.valueOf(updatedOfferDto.getCategory()));
+
+        this.offerRepository.saveAndFlush(offerToUpdate);
+    }
+
 }

@@ -13,11 +13,12 @@
 <div class="container">
     <h2 class="text-center text-white m-3">All Brands</h2>
     <div class="row mb-4">
-        <div th:each="brand, brandIndex : ${brands}" th:class="'col-md-' + (${brands.size()} > 1 ? 6 : 12)">
-            <div class="brand-section">
-                <h2 class="text-center text-white m-3" th:text="'Car brand: ' + ${brand.name}">Brand name</h2>
-                <div>Models:
-                    <table>
+        <div th:each="brand : ${brands}" class="col-md-6 mb-4 d-flex align-items-stretch">
+            <div class="brand-section p-3 border rounded bg-light d-flex flex-column">
+                <h2 class="text-center text-dark" th:text="'Car brand: ' + ${brand.name}">Brand name</h2>
+                <div class="flex-grow-1">
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
                             <th>No</th>
                             <th>Name</th>
@@ -26,6 +27,8 @@
                             <th>End Year</th>
                             <th>Picture</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr th:each="model, modelStat : ${brand.models}">
                             <td th:text="${modelStat.index + 1}">1</td>
                             <td th:text="${model.name}">Model Name</td>
@@ -34,6 +37,7 @@
                             <td th:text="${model.endYear}">Model End Year</td>
                             <td><img th:src="@{'/img/' + ${model.imageUrl}}" width="90"/></td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -41,7 +45,7 @@
     </div>
 
     <div>
-        <footer> </footer>
+        <footer></footer>
     </div>
 </div>
 </body>

@@ -73,13 +73,14 @@ public class UserServiceImpl implements UserService {
         this.loggedUser.clearFields();
     }
 
-    @Override
-    public boolean areImported() {
-        return this.userRepository.count() > 0;
-    }
 
     @Override
     public boolean existUser(UserDto userDto) {
         return userRepository.findByUsername(userDto.getUsername()) != null;
+    }
+
+    @Override
+    public User getUserById(String id) {
+        return this.userRepository.findById(id).orElse(null);
     }
 }
