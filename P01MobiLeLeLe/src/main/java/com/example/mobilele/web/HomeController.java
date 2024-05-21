@@ -102,8 +102,8 @@ public class HomeController {
         return model;
     }
 
-    @PostMapping("/offers/delete/{offerId}")
-    public ModelAndView deleteOffer(@PathVariable("offerId") String offerId, ModelAndView model){
+    @PostMapping("/offers/delete/{userId}/{offerId}")
+    public ModelAndView deleteOffer(@PathVariable("offerId") String offerId,@PathVariable("userId") String userId, ModelAndView model){
         this.offerService.deleteOffer(offerId);
         model.setViewName("redirect:/");
         return model;
