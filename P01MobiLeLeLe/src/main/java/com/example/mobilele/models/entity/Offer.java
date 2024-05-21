@@ -47,6 +47,6 @@ public class Offer extends BaseEntity{
     @ManyToOne(cascade = CascadeType.ALL)
     private Model model;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User seller;
 }

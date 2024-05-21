@@ -32,6 +32,7 @@ public class OfferServiceImpl implements OfferService {
         this.modelMapper = modelMapper;
     }
 
+
     @Override
     public void addOffer(OfferDto offerDto, UserLoginDto userLoginDto) {
         Offer offer = modelMapper.map(offerDto,Offer.class);
@@ -96,6 +97,11 @@ public class OfferServiceImpl implements OfferService {
         model.setCategory(Category.valueOf(updatedOfferDto.getCategory()));
 
         this.offerRepository.saveAndFlush(offerToUpdate);
+    }
+
+    @Override
+    public void deleteOffer(String offerId) {
+        this.offerRepository.deleteById(offerId);
     }
 
 }

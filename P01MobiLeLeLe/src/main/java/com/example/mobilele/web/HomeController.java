@@ -10,6 +10,7 @@ import com.example.mobilele.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
@@ -88,8 +89,8 @@ public class HomeController {
     }
 
     @GetMapping("/offers/update/{userId}/{offerId}")
-    public ModelAndView updateOffer(@PathVariable("userId") String userid,@PathVariable String offerId, ModelAndView model) {
-        User user = this.userService.getUserById(userid);
+    public ModelAndView updateOffer(@PathVariable("userId") String userId,@PathVariable String offerId, ModelAndView model) {
+        User user = this.userService.getUserById(userId);
         UserRole role = user.getRole();
         Offer offer = offerService.getOfferById(offerId);
         model.addObject("offer", offer);
@@ -98,6 +99,13 @@ public class HomeController {
         }else {
             model.setViewName("redirect:/offers/all");
         }
+        return model;
+    }
+
+    @PostMapping("/offers/delete/{offerId}")
+    public ModelAndView deleteOffer(@PathVariable("offerId") String offerId, ModelAndView model){
+        this.offerService.deleteOffer(offerId);
+        model.setViewName("redirect:/");
         return model;
     }
 }
