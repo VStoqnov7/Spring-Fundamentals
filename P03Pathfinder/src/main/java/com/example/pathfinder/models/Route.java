@@ -13,8 +13,8 @@ import java.util.List;
 @Table(name = "routes")
 public class Route extends BaseEntity{
 
-    @Column(name = "gps_coordinates", columnDefinition = "LONGTEXT")
-    private String gpsCoordinates;
+    @Column(name = "gpx_coordinates", columnDefinition = "LONGTEXT")
+    private String gpxCoordinates;
 
     @Column
     @Enumerated(EnumType.STRING)
