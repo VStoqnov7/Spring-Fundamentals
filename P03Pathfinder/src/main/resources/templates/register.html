@@ -8,16 +8,14 @@
     <h1 class="border-bottom">Register</h1>
     <div class="d-flex justify-content-center ">
         <div class="row g-3">
-            <form
-                    action="/"
-                    method="">
+            <form action="/register"
+                    method="POST">
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label ">Username</label>
                     </div>
                     <div class="col-auto">
                         <input name="username"
-
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputUsername"
@@ -27,7 +25,7 @@
                                class="invalid-feedback bg-danger rounded">Username length must be more than 3
                             characters</small>
 
-                        <small id="usernameUniqueError"
+                        <small id="usernameUniqueError" th:if="${invalidUsername}"
                                class=" bg-danger rounded">Username is already occupied</small>
 
                     </div>
@@ -38,15 +36,15 @@
                         <label for="inputFullName" class="col-form-label ">Full Name</label>
                     </div>
                     <div class="col-auto">
-                        <input name="fullname"
-                               required minlength="5" maxlength="20"
+                        <input required minlength="5" maxlength="20"
                                type="text"
+                               name="fullName"
                                id="inputFullName"
                                class="form-control"
                                aria-describedby="fullNameHelpInline">
-                        <small id="fullNameError"
+                        <small id="fullNameError" th:if="${invalidFullName}"
                                class="invalid-feedback  form-text bg-danger rounded">Full name length must be more than
-                            3 characters</small>
+                            5 characters</small>
                     </div>
                 </div>
 
@@ -61,8 +59,11 @@
                                id="inputEmail"
                                class="form-control"
                                aria-describedby="emailHelpInline">
-                        <small id="emailError"
+                        <small id="emailError" th:if="${invalidEmail}"
                                class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>
+
+                        <small th:if="${invalidEmail}"
+                               class=" bg-danger rounded">Email is already occupied</small>
                     </div>
                 </div>
                 <div>
@@ -76,8 +77,11 @@
                                class="form-control"
                                min="0" max="90"
                                aria-describedby="ageHelpInline">
-                        <small id="ageError"
+                        <small id="ageError" th:if="${invalidAge}"
                                class="invalid-feedback  form-text bg-danger rounded">Must be valid age</small>
+
+                        <small th:if="${invalidAge}"
+                               class=" bg-danger rounded">Must be valid age</small>
                     </div>
                 </div>
                 <div>
@@ -91,10 +95,12 @@
                                id="inputPassword"
                                class="form-control"
                                aria-describedby="passwordHelpInline">
-                        <small id="passwordError"
+                        <small id="passwordError" th:if="${invalidPassword}"
                                class="invalid-feedback  form-text bg-danger rounded">
                             Password length must be between 5 and 20 characters and passwords should match.
                         </small>
+                        <small th:if="${invalidConfirmPassword}"
+                               class=" bg-danger rounded">Invalid password</small>
                     </div>
                 </div>
 
@@ -109,10 +115,12 @@
                                id="inputConfirmPassword"
                                class="form-control"
                                aria-describedby="confirmPasswordHelpInline">
-                        <small id="confirmPasswordError"
+                        <small id="confirmPasswordError" th:if="${invalidConfirmPassword}"
                                class="invalid-feedback  form-text bg-danger rounded">
                             Password length must be between 5 and 20 characters and passwords should match.
                         </small>
+                        <small th:if="${invalidConfirmPassword}"
+                               class=" bg-danger rounded">Invalid password</small>
                     </div>
                 </div>
 

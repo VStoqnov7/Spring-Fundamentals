@@ -1,8 +1,8 @@
 package com.example.pathfinder.service.impl;
 
-import com.example.pathfinder.service.Comment;
+import com.example.pathfinder.service.CommentService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CommentServiceImpl implements Comment {
+public class CommentServiceImpl implements CommentService {
 }

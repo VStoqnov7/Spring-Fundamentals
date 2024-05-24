@@ -1,4 +1,4 @@
 package com.example.pathfinder.service;
 
-public interface Message {
+public interface PictureService {
 }

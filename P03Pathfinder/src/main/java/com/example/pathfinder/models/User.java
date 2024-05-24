@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,9 +29,13 @@ public class User extends BaseEntity{
     @Column(nullable = false)
     private int age;
 
-    @ManyToMany
-    private List<UserRole> roles;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<UserRole> roles;
 
     @Enumerated(EnumType.STRING)
     private Level level;
+
+    public User() {
+        this.roles = new HashSet<>();
+    }
 }

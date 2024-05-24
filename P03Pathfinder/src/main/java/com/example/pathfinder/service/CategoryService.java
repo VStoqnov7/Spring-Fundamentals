@@ -1,4 +1,4 @@
 package com.example.pathfinder.service;
 
-public interface Comment {
+public interface CategoryService {
 }

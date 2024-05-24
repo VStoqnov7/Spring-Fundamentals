@@ -1,4 +1,4 @@
 package com.example.pathfinder.service;
 
-public interface Picture {
+public interface UserRoleService {
 }
