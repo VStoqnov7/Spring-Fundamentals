@@ -1,28 +1,32 @@
 <nav class="main-nav" th:fragment="navigation">
     <ul>
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/login">Login</a>
-        </li>
-        <li>
-            <a href="/register">Register</a>
-        </li>
-        <li>
-            <a href="/about">About</a>
-        </li>
-        <li>
-            <a href="/addRoute">Add new route</a>
-        </li>
-        <li>
-            <a href="/profile">Profile</a>
-        </li>
-        <li>
-            <a href="/">Admin</a>
-        </li>
-        <li>
-            <a href="/">Logout</a>
-        </li>
+        <th:block th:if="${@currentUser.isAnonymous()}">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/login">Login</a>
+            </li>
+            <li>
+                <a href="/register">Register</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+        </th:block>
+        <th:block th:if="${!@currentUser.isAnonymous()}">
+            <li>
+                <a href="/addRoute">Add new route</a>
+            </li>
+            <li>
+                <a href="/profile">Profile</a>
+            </li>
+            <li>
+                <a href="/">Admin</a>
+            </li>
+            <li>
+                <a href="/">Logout</a>
+            </li>
+        </th:block>
     </ul>
 </nav>
