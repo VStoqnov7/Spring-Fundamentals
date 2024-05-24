@@ -8,6 +8,7 @@ import com.example.pathfinder.models.enums.Role;
 import com.example.pathfinder.repository.UserRepository;
 import com.example.pathfinder.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,10 +17,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -48,6 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserRegistrationDTO userRegistrationDTO) {
         User user = modelMapper.map(userRegistrationDTO, User.class);
+        user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setLevel(Level.BEGINNER);
         UserRole userRole = new UserRole();
 

@@ -33,7 +33,7 @@ public class UserRegistrationController {
                                  BindingResult bindingResult) {
         boolean checkUserName = this.userService.checkUserName(userRegistrationDTO.getUsername());
         boolean existUserEmail = this.userService.existUserByEmail(userRegistrationDTO.getEmail());
-        boolean validUserConfirmPassword = this.userService.checkConfirmPassword(userRegistrationDTO.getEmail(),userRegistrationDTO.getConfirmPassword());
+        boolean validUserConfirmPassword = this.userService.checkConfirmPassword(userRegistrationDTO.getPassword(),userRegistrationDTO.getConfirmPassword());
 
         if (bindingResult.hasFieldErrors("username") || checkUserName) {
             model.addObject("invalidUsername", true);
