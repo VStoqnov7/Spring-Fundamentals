@@ -9,12 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class HomeController {
 
-    @GetMapping("/login")
-    public ModelAndView login(ModelAndView model){
-        model.setViewName("login");
-        return model;
-    }
-
     @GetMapping("/about")
     public ModelAndView about(ModelAndView model){
         model.setViewName("about");

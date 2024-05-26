@@ -24,10 +24,7 @@ public class CurrentUser {
     }
 
     public boolean isAnonymous() {
-        return !isLoggedIn();
+        return !this.loggedIn;
     }
 
-    public boolean isUserAdmin() {
-        return !isAdmin();
-    }
 }

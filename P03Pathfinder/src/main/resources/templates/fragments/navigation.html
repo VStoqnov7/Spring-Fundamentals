@@ -14,18 +14,18 @@
                 <a href="/about">About</a>
             </li>
         </th:block>
-        <th:block th:if="${!@currentUser.isAnonymous()}">
+        <th:block th:unless="${@currentUser.isAnonymous()}">
             <li>
                 <a href="/addRoute">Add new route</a>
             </li>
             <li>
                 <a href="/profile">Profile</a>
             </li>
-            <li>
+            <li th:if="${@currentUser.isAdmin}">
                 <a href="/">Admin</a>
             </li>
             <li>
-                <a href="/">Logout</a>
+                <a href="/logout">Logout</a>
             </li>
         </th:block>
     </ul>

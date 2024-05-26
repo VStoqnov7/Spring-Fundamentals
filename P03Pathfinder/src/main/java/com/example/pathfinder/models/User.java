@@ -29,13 +29,10 @@ public class User extends BaseEntity{
     @Column(nullable = false)
     private int age;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<UserRole> roles;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private UserRole role;
 
     @Enumerated(EnumType.STRING)
     private Level level;
 
-    public User() {
-        this.roles = new HashSet<>();
-    }
 }
