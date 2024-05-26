@@ -32,14 +32,6 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean checkConfirmPassword(String password, String confirmPassword) {
-        if (password.equals(confirmPassword)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public boolean checkUserName(String username) {
         Optional<User> userByUsername = this.userRepository.findByUsername(username);
         if (userByUsername.isPresent()) {
@@ -65,5 +57,6 @@ public class UserServiceImpl implements UserService {
         }
         this.userRepository.saveAndFlush(user);
     }
+
 
 }

@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,11 @@ public class UserRegistrationController {
         this.userService = userService;
     }
 
+    @ModelAttribute(name = "userRegistrationDTO")
+    public UserRegistrationDTO initUserLoginFormDto() {
+        return new UserRegistrationDTO();
+    }
+
     @GetMapping("/register")
     public ModelAndView register(ModelAndView model){
         model.setViewName("register");
@@ -33,7 +39,6 @@ public class UserRegistrationController {
                                  BindingResult bindingResult) {
         boolean checkUserName = this.userService.checkUserName(userRegistrationDTO.getUsername());
         boolean existUserEmail = this.userService.existUserByEmail(userRegistrationDTO.getEmail());
-        boolean validUserConfirmPassword = this.userService.checkConfirmPassword(userRegistrationDTO.getPassword(),userRegistrationDTO.getConfirmPassword());
 
         if (bindingResult.hasFieldErrors("username") || checkUserName) {
             model.addObject("invalidUsername", true);
@@ -55,12 +60,13 @@ public class UserRegistrationController {
             model.addObject("invalidPassword", true);
         }
 
-        if (bindingResult.hasFieldErrors("confirmPassword") || validUserConfirmPassword) {
+        if (bindingResult.hasFieldErrors("confirmPassword")) {
             model.addObject("invalidConfirmPassword", true);
         }
 
-        if (bindingResult.hasErrors() || validUserConfirmPassword || existUserEmail) {
+        if (bindingResult.hasErrors() || existUserEmail || checkUserName) {
             model.setViewName("register");
+            model.addObject("userRegistrationDTO", userRegistrationDTO);
             return model;
         }
 
@@ -70,4 +76,5 @@ public class UserRegistrationController {
 
         return model;
     }
+
 }

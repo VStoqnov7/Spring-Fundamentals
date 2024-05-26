@@ -1,11 +1,13 @@
 package com.example.pathfinder.models.dto;
 
+import com.example.pathfinder.validations.registerValidation.PasswordMatch;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@PasswordMatch(password = "password", confirmPassword = "confirmPassword", message = "Passwords miss match")
 public class UserRegistrationDTO {
 
     @NotEmpty
