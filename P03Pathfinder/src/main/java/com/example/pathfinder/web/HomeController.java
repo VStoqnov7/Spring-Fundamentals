@@ -21,10 +21,6 @@ public class HomeController {
         return model;
     }
 
-    @GetMapping("/profile")
-    public ModelAndView profile(ModelAndView model){
-        model.setViewName("profile");
-        return model;
-    }
+
 
 }

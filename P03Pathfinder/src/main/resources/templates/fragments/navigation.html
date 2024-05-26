@@ -19,7 +19,7 @@
                 <a href="/addRoute">Add new route</a>
             </li>
             <li>
-                <a href="/profile">Profile</a>
+                <a th:href="@{'/profile/' + ${@currentUser.username}}">Profile</a>
             </li>
             <li th:if="${@currentUser.isAdmin}">
                 <a href="/">Admin</a>
