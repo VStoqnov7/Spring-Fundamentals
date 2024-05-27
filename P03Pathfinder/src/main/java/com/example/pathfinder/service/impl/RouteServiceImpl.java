@@ -30,14 +30,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void saveRoute(List<String> categories, RouteDTO routeDTO) {
-        List<Category> categoryEnums = categories.stream()
+    public void saveRoute(RouteDTO routeDTO) {
+        List<Category> categoryEnums = routeDTO.getCategories().stream()
                 .map(category -> new Category(CategoryName.valueOf(category)))
                 .collect(Collectors.toList());
 
-        routeDTO.setCategories(categoryEnums);
-
         Route route = modelMapper.map(routeDTO, Route.class);
+        route.setCategories(categoryEnums);
         User user = this.userService.findByUsername(currentUser.getUsername());
         route.setAuthor(user);
         this.routeRepository.saveAndFlush(route);

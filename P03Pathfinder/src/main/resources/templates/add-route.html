@@ -24,14 +24,14 @@
             </div>
             <div class="form-group">
                 <input name="name"
-
+                       required minlength="5" maxlength="20"
                        type="text"
                        id="inputName"
                        class="form-control"
                        aria-describedby="inputNameError">
-                <small id="inputNameError" th:if="${#fields.hasErrors('name')}"
-                       class="invalid-feedback bg-danger rounded">Name length must be more than 3 characters</small>
-
+                <p class="errors alert alert-danger" th:if="${#fields.hasErrors('name')}">
+                    Name length must be more than 3 characters
+                </p>
             </div>
         </div>
 
@@ -41,12 +41,13 @@
             </div>
             <div class="form-group">
                     <textarea name="description"
+                              required minlength="5"
                               id="inputDescription"
                               class="form-control"
                               aria-describedby="inputDescriptionError"></textarea>
-                <small id="inputDescriptionError" th:if="${#fields.hasErrors('description')}"
-                       class="invalid-feedback  form-text bg-danger rounded">Description length must be more than 5
-                    characters</small>
+                <p class="errors alert alert-danger" th:if="${#fields.hasErrors('description')}">
+                    Description length must be more than 5 characters.
+                </p>
             </div>
         </div>
 
@@ -60,8 +61,9 @@
                        id="inputGpx"
                        class="form-control"
                        aria-describedby="inputGpxError">
-                <small id="inputGpxError" th:if="${#fields.hasErrors('gpxCoordinates')}"
-                       class="invalid-feedback  form-text bg-danger rounded">Must be valid GPX Coordinates</small>
+                <p class="errors alert alert-danger" th:if="${#fields.hasErrors('gpxCoordinates')}">
+                    Must be valid GPX Coordinates
+                </p>
             </div>
         </div>
         <div>
@@ -70,8 +72,9 @@
                 <select id="level" class="custom-select" name="level">
                     <option th:each="level : ${levels}" th:value="${level}" th:text="${level}"></option>
                 </select>
-                <small th:if="${#fields.hasErrors('level')}"
-                       class="invalid-feedback  form-text bg-danger rounded">Must be valid level</small>
+                <p class="errors alert alert-danger" th:if="${#fields.hasErrors('level')}">
+                    Must be valid level
+                </p>
             </div>
         </div>
         <div>
@@ -80,8 +83,9 @@
                 <label for="videoUrl" >Video Url (only last eleven characters from Youtube)</label>
                 <input name="videoUrl" id="videoUrl" type="text"
                        class="form-control" placeholder="Video url">
-                <small th:if="${#fields.hasErrors('videoUrl')}"
-                       class="invalid-feedback  form-text bg-danger rounded">Must be valid URL</small>
+                <p class="errors alert alert-danger" th:if="${#fields.hasErrors('videoUrl')}">
+                    Must be valid URL
+                </p>
             </div>
         </div>
 
@@ -106,8 +110,9 @@
                         <label class="form-check-label">MOTORCYCLE</label>
                     </div>
                 </div>
-                <small th:if="${#fields.hasErrors('categories')}"
-                       class="invalid-feedback  form-text bg-danger rounded">Must be valid URL</small>
+                <p class="errors alert alert-danger" th:if="${#fields.hasErrors('categories')}">
+                    Must be one or more option.
+                </p>
             </div>
         </div>
 

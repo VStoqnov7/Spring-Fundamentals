@@ -25,4 +25,8 @@ public class Category extends BaseEntity{
 
     public Category() {
     }
+
+
 }
+
+

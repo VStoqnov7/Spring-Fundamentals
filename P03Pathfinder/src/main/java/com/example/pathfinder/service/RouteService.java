@@ -5,5 +5,5 @@ import com.example.pathfinder.models.dto.RouteDTO;
 import java.util.List;
 
 public interface RouteService {
-    void saveRoute(List<String> categories, RouteDTO routeDTO);
+    void saveRoute(RouteDTO routeDTO);
 }

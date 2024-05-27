@@ -4,13 +4,16 @@ import com.example.pathfinder.models.Category;
 import com.example.pathfinder.models.enums.Level;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -30,7 +33,7 @@ public class RouteDTO {
     @NotBlank
     private String gpxCoordinates;
 
-    @NonNull
+    @NotNull
     private Level level;
 
     @NotEmpty
@@ -38,5 +41,9 @@ public class RouteDTO {
     private String videoUrl;
 
     @NotEmpty
-    private List<Category> categories;
+    private List<String> categories;
+
+    public RouteDTO() {
+        this.categories = new ArrayList<>();
+    }
 }

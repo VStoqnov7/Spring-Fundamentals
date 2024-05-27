@@ -1,5 +1,6 @@
 package com.example.pathfinder.web;
 
+import com.example.pathfinder.models.Category;
 import com.example.pathfinder.models.dto.RouteDTO;
 import com.example.pathfinder.models.dto.UserLoginDTO;
 import com.example.pathfinder.models.enums.CategoryName;
@@ -39,20 +40,17 @@ public class RouteController {
 
 
     @PostMapping("/addRoute")
-    public ModelAndView addRoute(@RequestParam("categories") List<String> categories,
-                                 @Valid RouteDTO routeDTO,
+    public ModelAndView addRoute(@Valid RouteDTO routeDTO,
                                  BindingResult bindingResult,
                                  ModelAndView model){
         if (bindingResult.hasErrors()){
-
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println("Error: " + error.getDefaultMessage());
             });
-            model.setViewName("redirect:/addRoute");
+            model.setViewName("add-route");
             return model;
         }
-
-        this.routeService.saveRoute(categories,routeDTO);
+        this.routeService.saveRoute(routeDTO);
         model.setViewName("index");
         return model;
     }
