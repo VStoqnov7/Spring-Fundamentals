@@ -13,8 +13,9 @@
 <!-- Top Container -->
 <div class="row justify-content-center ">
     <form id="add-route-form" class="w-50 rounded text-white mt-5"
-          action="/"
-          method="/" enctype="multipart/form-data">
+          action="/addRoute"
+          method="POST" enctype="multipart/form-data"
+          th:object="${routeDTO}">
 
         <h3 class="border-left border-light pl-2">Add a new route</h3>
         <div>
@@ -23,12 +24,12 @@
             </div>
             <div class="form-group">
                 <input name="name"
-                       required minlength="5" maxlength="20"
+
                        type="text"
                        id="inputName"
                        class="form-control"
                        aria-describedby="inputNameError">
-                <small id="inputNameError"
+                <small id="inputNameError" th:if="${#fields.hasErrors('name')}"
                        class="invalid-feedback bg-danger rounded">Name length must be more than 3 characters</small>
 
             </div>
@@ -40,11 +41,10 @@
             </div>
             <div class="form-group">
                     <textarea name="description"
-                              required minlength="5"
                               id="inputDescription"
                               class="form-control"
                               aria-describedby="inputDescriptionError"></textarea>
-                <small id="inputDescriptionError"
+                <small id="inputDescriptionError" th:if="${#fields.hasErrors('description')}"
                        class="invalid-feedback  form-text bg-danger rounded">Description length must be more than 5
                     characters</small>
             </div>
@@ -55,54 +55,59 @@
                 <label for="inputGpx" class="col-form-label ">GPX Coordinates</label>
             </div>
             <div class="form-group">
-                <input type="file" name="gpxCoordinates"
+                <input name="gpxCoordinates"
                        required
                        id="inputGpx"
-                       class="form-control-file"
+                       class="form-control"
                        aria-describedby="inputGpxError">
-                <small id="inputGpxError"
+                <small id="inputGpxError" th:if="${#fields.hasErrors('gpxCoordinates')}"
                        class="invalid-feedback  form-text bg-danger rounded">Must be valid GPX Coordinates</small>
             </div>
         </div>
         <div>
             <div class="form-group">
                 <label for="level">Level</label>
-                <select id="level" class="custom-select">
-                    <option value="" selected>Select level</option>
-                    <option value="1" text="ADVANCED">Select level</option>
+                <select id="level" class="custom-select" name="level">
+                    <option th:each="level : ${levels}" th:value="${level}" th:text="${level}"></option>
                 </select>
+                <small th:if="${#fields.hasErrors('level')}"
+                       class="invalid-feedback  form-text bg-danger rounded">Must be valid level</small>
             </div>
         </div>
         <div>
 
             <div class="form-group">
-                <label for="videoUrl">Video Url (only last eleven characters from Youtube)</label>
-                <input id="videoUrl" type="text"
+                <label for="videoUrl" >Video Url (only last eleven characters from Youtube)</label>
+                <input name="videoUrl" id="videoUrl" type="text"
                        class="form-control" placeholder="Video url">
+                <small th:if="${#fields.hasErrors('videoUrl')}"
+                       class="invalid-feedback  form-text bg-danger rounded">Must be valid URL</small>
             </div>
         </div>
 
         <div>
             <div class="form-group">
-                <label for="categories">Categories</label>
-                <div>
+                <label>Categories</label>
+                <div class="form-check-grid">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="categories" id="hiking" value="hiking">
-                        <label class="form-check-label" for="hiking">Hiking</label>
+                        <input class="form-check-input" type="checkbox" name="categories" value="CAR">
+                        <label class="form-check-label">CAR</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="categories" id="cycling" value="cycling">
-                        <label class="form-check-label" for="cycling">Cycling</label>
+                        <input class="form-check-input" type="checkbox" name="categories" value="PEDESTRIAN">
+                        <label class="form-check-label">PEDESTRIAN</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="categories" id="running" value="running">
-                        <label class="form-check-label" for="running">Running</label>
+                        <input class="form-check-input" type="checkbox" name="categories" value="BICYCLE">
+                        <label class="form-check-label">BICYCLE</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="categories" id="swimming" value="swimming">
-                        <label class="form-check-label" for="swimming">Swimming</label>
+                        <input class="form-check-input" type="checkbox" name="categories" value="MOTORCYCLE">
+                        <label class="form-check-label">MOTORCYCLE</label>
                     </div>
                 </div>
+                <small th:if="${#fields.hasErrors('categories')}"
+                       class="invalid-feedback  form-text bg-danger rounded">Must be valid URL</small>
             </div>
         </div>
 

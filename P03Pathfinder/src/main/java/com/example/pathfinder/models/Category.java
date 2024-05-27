@@ -19,4 +19,10 @@ public class Category extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    public Category(CategoryName name) {
+        this.name = name;
+    }
+
+    public Category() {
+    }
 }

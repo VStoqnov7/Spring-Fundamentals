@@ -15,13 +15,6 @@ public class HomeController {
         return model;
     }
 
-    @GetMapping("/addRoute")
-    public ModelAndView addRoute(ModelAndView model){
-        model.setViewName("add-route");
-        return model;
-    }
-
-
     @GetMapping("/pedestrian")
     public ModelAndView pedestrian(ModelAndView model){
         model.setViewName("pedestrian");

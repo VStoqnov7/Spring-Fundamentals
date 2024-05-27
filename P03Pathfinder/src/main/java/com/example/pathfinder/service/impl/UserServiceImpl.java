@@ -81,8 +81,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logout() {
-        System.out.println(currentUser.toString());
-        System.out.println(currentUser.toString());
         this.currentUser.clear();
     }
 
