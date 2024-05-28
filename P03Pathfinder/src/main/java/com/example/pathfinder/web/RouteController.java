@@ -1,6 +1,7 @@
 package com.example.pathfinder.web;
 
 import com.example.pathfinder.models.Category;
+import com.example.pathfinder.models.dto.AllRoutesDTO;
 import com.example.pathfinder.models.dto.RouteDTO;
 import com.example.pathfinder.models.dto.UserLoginDTO;
 import com.example.pathfinder.models.enums.CategoryName;
@@ -12,9 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -29,6 +28,15 @@ public class RouteController {
     @ModelAttribute(name = "routeDTO")
     public RouteDTO routeAddForm() {
         return new RouteDTO();
+    }
+
+    @GetMapping("/routes")
+    public ModelAndView routes(ModelAndView model){
+
+        final List<AllRoutesDTO> allRoutes = this.routeService.findAllRoutes();
+        model.addObject("routes", allRoutes);
+        model.setViewName("routes");
+        return model;
     }
 
     @GetMapping("/addRoute")
@@ -54,4 +62,5 @@ public class RouteController {
         model.setViewName("index");
         return model;
     }
+
 }

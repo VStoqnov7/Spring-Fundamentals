@@ -45,10 +45,4 @@ public class HomeController {
         return model;
     }
 
-    @GetMapping("/routes")
-    public ModelAndView routes(ModelAndView model){
-        model.setViewName("routes");
-        return model;
-    }
-
 }

@@ -3,6 +3,7 @@ package com.example.pathfinder.service.impl;
 import com.example.pathfinder.models.Category;
 import com.example.pathfinder.models.Route;
 import com.example.pathfinder.models.User;
+import com.example.pathfinder.models.dto.AllRoutesDTO;
 import com.example.pathfinder.models.dto.RouteDTO;
 import com.example.pathfinder.models.enums.CategoryName;
 import com.example.pathfinder.models.user.CurrentUser;
@@ -40,5 +41,14 @@ public class RouteServiceImpl implements RouteService {
         User user = this.userService.findByUsername(currentUser.getUsername());
         route.setAuthor(user);
         this.routeRepository.saveAndFlush(route);
+    }
+
+    @Override
+    public List<AllRoutesDTO> findAllRoutes() {
+        List<Route> allRoutes = this.routeRepository.findAll();
+
+        return allRoutes.stream()
+                .map(route -> this.modelMapper.map(route, AllRoutesDTO.class))
+                .collect(Collectors.toList());
     }
 }
