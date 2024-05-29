@@ -39,4 +39,7 @@ public class Route extends BaseEntity{
 
     @OneToMany(mappedBy = "route", fetch = FetchType.EAGER)
     private List<Picture> pictures;
+
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 }

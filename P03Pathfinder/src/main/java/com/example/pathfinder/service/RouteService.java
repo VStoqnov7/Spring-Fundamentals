@@ -14,4 +14,5 @@ public interface RouteService {
 
     RouteDetailDTO findRouteById(String routeId);
 
+    void addComment(String routeId, String message);
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 public class RouteDetailDTO {
 
+    private String id;
     private String authorFullName;
     private String description;
     private String gpxCoordinates;

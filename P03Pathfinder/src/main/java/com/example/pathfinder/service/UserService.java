@@ -17,4 +17,7 @@ public interface UserService {
     void login(UserLoginDTO userLoginDTO);
 
     void logout();
+
+    boolean isLogin();
+
 }

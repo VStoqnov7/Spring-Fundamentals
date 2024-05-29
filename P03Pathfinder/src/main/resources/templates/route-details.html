@@ -42,14 +42,14 @@
             </div>
         </section>
         <section id="map" >
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11730.169303546756!2d23.304324001387585!3d42.69223620482261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85156dde5df7%3A0x3d965b0d2c6d427a!2z0L_Quy4g4oCe0KDRg9GB0LrQuCDQv9Cw0LzQtdGC0L3QuNC6Ig!5e0!3m2!1sbg!2sbg!4v1716813542266!5m2!1sbg!2sbg" style="width: 100%; height: 100%;" allowfullscreen="allowfullscreen" loading="lazy"></iframe>
+            <iframe th:src="${route.gpxCoordinates}" style="width: 100%; height: 100%;" allowfullscreen="allowfullscreen" loading="lazy"></iframe>
         </section>
         <section id="video">
-            <iframe id="frame" src="https://www.youtube.com/embed/8iayhWbizYs?si=W3zHHGPT2k_7qczJ"></iframe>
+            <iframe id="frame" th:src="${route.videoUrl}"></iframe>
         </section>
         <section class="route-description text-center">
             <h4>Description:</h4>
-            <p id="route-description">Description: </p>
+            <p id="route-description" th:text="${route.description}">Description: </p>
         </section>
         <section class="gallery">
             <img class="rounded" src="/images/pic4.jpg" height="100%" alt="">
@@ -61,7 +61,7 @@
             <div>
                 <!-- Comments submission -->
                 <form id="commentForm" method="POST"
-                      action="/">
+                      th:action="@{'/routeComments/' + ${route.id}}">
                     <div class="form-group">
                         <h4>Leave a comment</h4>
                         <label for="message">Message</label>
@@ -71,9 +71,9 @@
                                   rows="5"
                                   class="form-control"
                                   style="background-color: white;"></textarea>
-                        <small id="messageError" class="invalid-feedback">
-                            Message should be at least 10 characters.
-                        </small>
+                        <p class="errors alert alert-danger" th:if="${isLogin}">
+                            You must be logged in to access this feature.
+                        </p>
                     </div>
 
                     <div class="form-group">

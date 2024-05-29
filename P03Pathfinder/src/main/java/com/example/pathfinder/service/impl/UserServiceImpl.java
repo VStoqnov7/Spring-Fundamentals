@@ -84,5 +84,10 @@ public class UserServiceImpl implements UserService {
         this.currentUser.clear();
     }
 
+    @Override
+    public boolean isLogin() {
+        return this.currentUser.getUsername() == null;
+    }
+
 
 }
