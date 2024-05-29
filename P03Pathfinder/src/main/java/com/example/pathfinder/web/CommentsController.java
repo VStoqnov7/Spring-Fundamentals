@@ -24,7 +24,7 @@ public class CommentsController {
 
     @PostMapping("/routeComments/{routeId}")
     public ModelAndView commentRoute(@PathVariable String routeId, @RequestParam("message") String message, ModelAndView model){
-        RouteDetailDTO route = this.routeService.findRouteById(routeId);
+        RouteDetailDTO route = this.routeService.findRouteDetailDTOById(routeId);
         boolean userIsLogin = this.userService.isLogin();
         model.addObject("route",route);
         model.addObject("isLogin", userIsLogin);

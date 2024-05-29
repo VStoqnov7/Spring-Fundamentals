@@ -54,12 +54,20 @@ public class RouteServiceImpl implements RouteService {
         List<Route> allRoutes = this.routeRepository.findAll();
 
         return allRoutes.stream()
-                .map(route -> this.modelMapper.map(route, AllRoutesDTO.class))
+                .map(route -> {
+                    AllRoutesDTO routeDTO = modelMapper.map(route, AllRoutesDTO.class);
+                    String imageUrl = route.getPictures().stream()
+                            .map(pic -> pic.getUrl())
+                            .findFirst()
+                            .orElse(null);
+                    routeDTO.setImageUrl(imageUrl);
+                    return routeDTO;
+                })
                 .collect(Collectors.toList());
     }
 
     @Override
-    public RouteDetailDTO findRouteById(String routeId) {
+    public RouteDetailDTO findRouteDetailDTOById(String routeId) {
         return this.routeRepository.findById(routeId)
                 .map(route -> modelMapper.map(route, RouteDetailDTO.class))
                 .orElse(null);
@@ -77,5 +85,10 @@ public class RouteServiceImpl implements RouteService {
             comment.setRoute(route);
             this.commentRepository.saveAndFlush(comment);
         }
+    }
+
+    @Override
+    public Route findRouteById(String routeId) {
+        return this.routeRepository.findById(routeId).orElse(null);
     }
 }

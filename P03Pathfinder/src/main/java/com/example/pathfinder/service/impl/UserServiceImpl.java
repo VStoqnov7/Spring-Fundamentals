@@ -89,5 +89,14 @@ public class UserServiceImpl implements UserService {
         return this.currentUser.getUsername() == null;
     }
 
+    @Override
+    public User findCurrentUser() {
+        if (currentUser.getUsername() != null) {
+            return this.userRepository.findByUsername(currentUser.getUsername()).orElse(null);
+        } else {
+            return null;
+        }
+    }
+
 
 }

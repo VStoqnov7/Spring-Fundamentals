@@ -1,12 +1,6 @@
 package com.example.pathfinder.web;
 
-import com.example.pathfinder.models.Category;
-import com.example.pathfinder.models.Route;
-import com.example.pathfinder.models.dto.AllRoutesDTO;
-import com.example.pathfinder.models.dto.RouteDTO;
-import com.example.pathfinder.models.dto.RouteDetailDTO;
-import com.example.pathfinder.models.dto.UserLoginDTO;
-import com.example.pathfinder.models.enums.CategoryName;
+import com.example.pathfinder.models.dto.*;
 import com.example.pathfinder.models.enums.Level;
 import com.example.pathfinder.service.RouteService;
 import jakarta.validation.Valid;
@@ -32,6 +26,11 @@ public class RouteController {
         return new RouteDTO();
     }
 
+    @ModelAttribute(name = "pictureUploadDTO")
+    public PictureUploadDTO pictureUploadDTO() {
+        return new PictureUploadDTO();
+    }
+
     @GetMapping("/addRoute")
     public ModelAndView addRoute(ModelAndView model){
         model.addObject("levels", Level.values());
@@ -45,9 +44,6 @@ public class RouteController {
                                  BindingResult bindingResult,
                                  ModelAndView model){
         if (bindingResult.hasErrors()){
-            bindingResult.getAllErrors().forEach(error -> {
-                System.out.println("Error: " + error.getDefaultMessage());
-            });
             model.setViewName("add-route");
             return model;
         }
@@ -67,7 +63,7 @@ public class RouteController {
 
     @GetMapping("/routeDetails/{routeId}")
     public ModelAndView routeDetails(@PathVariable String routeId, ModelAndView model){
-        RouteDetailDTO route = this.routeService.findRouteById(routeId);
+        RouteDetailDTO route = this.routeService.findRouteDetailDTOById(routeId);
         if (route != null){
             model.addObject("route",route);
             model.setViewName("route-details");

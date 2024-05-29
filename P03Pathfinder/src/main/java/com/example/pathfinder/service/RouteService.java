@@ -12,7 +12,10 @@ public interface RouteService {
 
     List<AllRoutesDTO> findAllRoutes();
 
-    RouteDetailDTO findRouteById(String routeId);
+    RouteDetailDTO findRouteDetailDTOById(String routeId);
 
     void addComment(String routeId, String message);
+
+    Route findRouteById(String routeId);
+
 }

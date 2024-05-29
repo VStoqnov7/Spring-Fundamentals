@@ -20,4 +20,6 @@ public interface UserService {
 
     boolean isLogin();
 
+    User findCurrentUser();
+
 }

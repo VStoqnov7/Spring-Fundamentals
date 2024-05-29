@@ -1,5 +1,6 @@
 package com.example.pathfinder.models.dto;
 
+import com.example.pathfinder.models.Picture;
 import lombok.Getter;
 import lombok.Setter;
 
