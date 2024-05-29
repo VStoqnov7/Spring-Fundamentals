@@ -36,4 +36,7 @@ public class Route extends BaseEntity{
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Category> categories;
+
+    @OneToMany(mappedBy = "route", fetch = FetchType.EAGER)
+    private List<Picture> pictures;
 }

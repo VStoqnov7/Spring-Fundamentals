@@ -5,6 +5,7 @@ import com.example.pathfinder.models.Route;
 import com.example.pathfinder.models.User;
 import com.example.pathfinder.models.dto.AllRoutesDTO;
 import com.example.pathfinder.models.dto.RouteDTO;
+import com.example.pathfinder.models.dto.RouteDetailDTO;
 import com.example.pathfinder.models.enums.CategoryName;
 import com.example.pathfinder.models.user.CurrentUser;
 import com.example.pathfinder.repository.RouteRepository;
@@ -50,5 +51,12 @@ public class RouteServiceImpl implements RouteService {
         return allRoutes.stream()
                 .map(route -> this.modelMapper.map(route, AllRoutesDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public RouteDetailDTO findRouteById(String routeId) {
+        return this.routeRepository.findById(routeId)
+                .map(route -> modelMapper.map(route, RouteDetailDTO.class))
+                .orElse(null);
     }
 }
