@@ -64,12 +64,12 @@
 
     <!-- Info Section -->
     <section class="road">
-        <img src="/images/most-commented.jpg" alt="">
+        <img th:src="${mostCommentedRoute.pictureUrl}" alt="">
         <div>
-            <h2>The most commented route</h2>
-            <p>Read more about the most commented route and do not miss the
+            <h2 th:text="${mostCommentedRoute.name}">The most commented route</h2>
+            <p th:text="${mostCommentedRoute.description}">Read more about the most commented route and do not miss the
                 chance to visit it and give your opinion to help other users.</p>
-            <a href="/routeDetails" class="btn">Learn More</a>
+            <a th:href="@{'/routeDetails/' + ${mostCommentedRoute.id}}"class="btn">Learn More</a>
         </div>
     </section>
 

@@ -7,6 +7,7 @@ import com.example.pathfinder.models.User;
 import com.example.pathfinder.models.dto.AllRoutesDTO;
 import com.example.pathfinder.models.dto.RouteDTO;
 import com.example.pathfinder.models.dto.RouteDetailDTO;
+import com.example.pathfinder.models.dto.RouteMostCommentedDTO;
 import com.example.pathfinder.models.enums.CategoryName;
 import com.example.pathfinder.models.user.CurrentUser;
 import com.example.pathfinder.repository.CommentRepository;
@@ -90,5 +91,17 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Route findRouteById(String routeId) {
         return this.routeRepository.findById(routeId).orElse(null);
+    }
+
+    @Override
+    public RouteMostCommentedDTO findMostCommentedRouteDTO() {
+        Route mostCommentedRoute = this.routeRepository.findMostCommentedRoute();
+        RouteMostCommentedDTO dto = modelMapper.map(mostCommentedRoute, RouteMostCommentedDTO.class);
+        String imageUrl = mostCommentedRoute.getPictures().stream()
+                .map(pic -> pic.getUrl())
+                .findFirst()
+                .orElse(null);
+        dto.setPictureUrl(imageUrl);
+        return dto;
     }
 }
