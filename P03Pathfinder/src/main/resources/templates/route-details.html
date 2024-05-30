@@ -74,7 +74,7 @@
             <h4>Description:</h4>
             <p id="route-description" th:text="${route.description}">Description: </p>
         </section>
-        <div class="gallery" >
+        <div class="gallery" style="align-items: center;" >
             <section th:each="picture : ${route.pictures}">
                 <img class="rounded" th:src="${picture.url}" alt="">
             </section>

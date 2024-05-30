@@ -5,6 +5,7 @@ import com.example.pathfinder.models.dto.AllRoutesDTO;
 import com.example.pathfinder.models.dto.RouteDTO;
 import com.example.pathfinder.models.dto.RouteDetailDTO;
 import com.example.pathfinder.models.dto.RouteMostCommentedDTO;
+import com.example.pathfinder.models.enums.CategoryName;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface RouteService {
 
     RouteMostCommentedDTO findMostCommentedRouteDTO();
 
+    List<AllRoutesDTO> findRouteByCategory(CategoryName categoryPedestrian);
 }

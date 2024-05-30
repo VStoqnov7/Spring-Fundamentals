@@ -104,4 +104,21 @@ public class RouteServiceImpl implements RouteService {
         dto.setPictureUrl(imageUrl);
         return dto;
     }
+
+    @Override
+    public List<AllRoutesDTO> findRouteByCategory(CategoryName categoryPedestrian) {
+        List<Route> allRoutes = this.routeRepository.findAllByCategories(categoryPedestrian);
+
+        return allRoutes.stream()
+                .map(route -> {
+                    AllRoutesDTO routeDTO = modelMapper.map(route, AllRoutesDTO.class);
+                    String imageUrl = route.getPictures().stream()
+                            .map(pic -> pic.getUrl())
+                            .findFirst()
+                            .orElse(null);
+                    routeDTO.setImageUrl(imageUrl);
+                    return routeDTO;
+                })
+                .collect(Collectors.toList());
+    }
 }
