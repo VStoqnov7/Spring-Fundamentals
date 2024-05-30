@@ -28,7 +28,7 @@ public class Route extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     private User author;
 
     @Column(name = "video_url")

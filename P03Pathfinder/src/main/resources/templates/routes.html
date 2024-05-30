@@ -12,15 +12,15 @@
 
 
     <section class="road" th:each="route : ${routes}">
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div style="display: flex; justify-content: center;">
             <img th:if="${route.imageUrl != null}" th:src="${route.imageUrl}" alt="Route Image"
                  style="height: 18rem;"/>
             <img th:if="${route.imageUrl == null}" src="/images/default-route.png" alt="Default Image"
                  style="height: 18rem;"/>
         </div>
-        <div>
+        <div style="width: 30rem;">
             <h2 th:text="${route.name}">Route Name</h2>
-            <p th:text="${route.description}">Route Description.</p>
+            <p th:text="${route.description}" style="max-width: 100%; overflow-wrap: break-word;">Route Description.</p>
             <a th:href="@{'/routeDetails/' + ${route.id}}" class="btn">View Details</a>
         </div>
     </section>

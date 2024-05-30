@@ -11,9 +11,9 @@
     </header>
 
     <section class="road" th:each="route : ${routesCategory}">
-        <div >
+        <div style="width: 30rem;">
             <h2 th:text="${route.name}">Title</h2>
-            <p th:text="${route.description}">Very long description</p>
+            <p th:text="${route.description}" style="max-width: 100%; overflow-wrap: break-word;">Route Description.</p>
             <a th:href="@{'/routeDetails/' + ${route.id}}" class="btn">Learn More</a>
         </div>
         <img class="rounded-circle w-75 ml-5" th:src="${route.imageUrl}" style="height: 18rem;" alt="Title image">

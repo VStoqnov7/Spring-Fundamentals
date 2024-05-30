@@ -77,7 +77,7 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public void addComment(String routeId, String message) {
         Route route = this.routeRepository.findById(routeId).orElse(null);
-        if (route != null && currentUser.getUsername() != null){
+        if (route != null && currentUser.getUsername() != null) {
             User user = this.userService.findByUsername(currentUser.getUsername());
             Comment comment = new Comment();
             comment.setTextContent(message);
@@ -96,13 +96,16 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public RouteMostCommentedDTO findMostCommentedRouteDTO() {
         Route mostCommentedRoute = this.routeRepository.findMostCommentedRoute();
-        RouteMostCommentedDTO dto = modelMapper.map(mostCommentedRoute, RouteMostCommentedDTO.class);
-        String imageUrl = mostCommentedRoute.getPictures().stream()
-                .map(pic -> pic.getUrl())
-                .findFirst()
-                .orElse(null);
-        dto.setPictureUrl(imageUrl);
-        return dto;
+        if (mostCommentedRoute != null) {
+            RouteMostCommentedDTO dto = modelMapper.map(mostCommentedRoute, RouteMostCommentedDTO.class);
+            String imageUrl = mostCommentedRoute.getPictures().stream()
+                    .map(pic -> pic.getUrl())
+                    .findFirst()
+                    .orElse(null);
+            dto.setPictureUrl(imageUrl);
+            return dto;
+        }
+        return new RouteMostCommentedDTO();
     }
 
     @Override

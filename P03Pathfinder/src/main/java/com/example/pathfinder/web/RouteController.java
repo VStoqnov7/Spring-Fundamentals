@@ -48,13 +48,12 @@ public class RouteController {
             return model;
         }
         this.routeService.saveRoute(routeDTO);
-        model.setViewName("index");
+        model.setViewName("redirect:/");
         return model;
     }
 
     @GetMapping("/routes")
     public ModelAndView routes(ModelAndView model){
-
         final List<AllRoutesDTO> allRoutes = this.routeService.findAllRoutes();
         model.addObject("routes", allRoutes);
         model.setViewName("routes");

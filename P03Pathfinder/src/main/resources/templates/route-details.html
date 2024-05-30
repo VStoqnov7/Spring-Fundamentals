@@ -76,7 +76,7 @@
         </section>
         <div class="gallery" style="align-items: center;" >
             <section th:each="picture : ${route.pictures}">
-                <img class="rounded" th:src="${picture.url}" alt="">
+                <img class="rounded" th:src="${picture.url}" style="max-width: 18rem;" alt="">
             </section>
         </div>
         <section class="comments">

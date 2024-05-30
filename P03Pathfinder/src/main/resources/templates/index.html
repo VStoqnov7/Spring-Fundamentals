@@ -63,12 +63,16 @@
     </section>
 
     <!-- Info Section -->
-    <section class="road">
-        <img th:src="${mostCommentedRoute.pictureUrl}" alt="">
-        <div>
+    <section class="road" th:if="${mostCommentedRoute.name != null}">
+        <div style="display: flex; justify-content: center;">
+            <img th:if="${mostCommentedRoute.pictureUrl != null}" th:src="${mostCommentedRoute.pictureUrl}"  alt="Route Image"
+                 style="height: 18rem;"/>
+            <img th:if="${mostCommentedRoute.pictureUrl == null}" src="/images/default-route.png" alt="Default Image"
+                 style="height: 18rem;"/>
+        </div>
+        <div style="width: 30rem;">
             <h2 th:text="${mostCommentedRoute.name}">The most commented route</h2>
-            <p th:text="${mostCommentedRoute.description}">Read more about the most commented route and do not miss the
-                chance to visit it and give your opinion to help other users.</p>
+            <p th:text="${mostCommentedRoute.description}" style="max-width: 100%; overflow-wrap: break-word;">Route Description.</p>
             <a th:href="@{'/routeDetails/' + ${mostCommentedRoute.id}}"class="btn">Learn More</a>
         </div>
     </section>
