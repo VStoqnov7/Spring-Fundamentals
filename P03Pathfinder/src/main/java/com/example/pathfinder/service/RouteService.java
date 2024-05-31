@@ -1,7 +1,7 @@
 package com.example.pathfinder.service;
 
 import com.example.pathfinder.models.Route;
-import com.example.pathfinder.models.dto.AllRoutesDTO;
+import com.example.pathfinder.models.dto.RouteAllDTO;
 import com.example.pathfinder.models.dto.RouteDTO;
 import com.example.pathfinder.models.dto.RouteDetailDTO;
 import com.example.pathfinder.models.dto.RouteMostCommentedDTO;
@@ -12,7 +12,7 @@ import java.util.List;
 public interface RouteService {
     void saveRoute(RouteDTO routeDTO);
 
-    List<AllRoutesDTO> findAllRoutes();
+    List<RouteAllDTO> findAllRoutes();
 
     RouteDetailDTO findRouteDetailDTOById(String routeId);
 
@@ -22,5 +22,5 @@ public interface RouteService {
 
     RouteMostCommentedDTO findMostCommentedRouteDTO();
 
-    List<AllRoutesDTO> findRouteByCategory(CategoryName categoryPedestrian);
+    List<RouteAllDTO> findRouteByCategory(CategoryName categoryPedestrian);
 }

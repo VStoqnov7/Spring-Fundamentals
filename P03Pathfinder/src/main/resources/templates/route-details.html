@@ -72,9 +72,10 @@
         </section>
         <section class="route-description text-center">
             <h4>Description:</h4>
-            <p id="route-description" th:text="${route.description}">Description: </p>
+            <p id="route-description" th:text="${route.description}"
+               style="max-width: 100%; overflow-wrap: break-word;">Description: </p>
         </section>
-        <div class="gallery" style="align-items: center;" >
+        <div class="gallery" style="align-items: center;">
             <section th:each="picture : ${route.pictures}">
                 <img class="rounded" th:src="${picture.url}" style="max-width: 18rem;" alt="">
             </section>

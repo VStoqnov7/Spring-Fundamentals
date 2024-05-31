@@ -16,8 +16,10 @@
             <p th:text="${route.description}" style="max-width: 100%; overflow-wrap: break-word;">Route Description.</p>
             <a th:href="@{'/routeDetails/' + ${route.id}}" class="btn">Learn More</a>
         </div>
-        <img class="rounded-circle w-75 ml-5" th:src="${route.imageUrl}" style="height: 18rem;" alt="Title image">
-    </section>
+        <img class="rounded-circle w-75 ml-5"  th:if="${route.imageUrl != null}" th:src="${route.imageUrl}" alt="Route Image"
+             style="height: 18rem;"/>
+        <img  th:if="${route.imageUrl == null}" src="/images/default-route.png" alt="Default Image"
+              style="height: 18rem;"/>    </section>
 </div>
 <!-- Wrapper Ends -->
 </body>

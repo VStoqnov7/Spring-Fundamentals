@@ -54,7 +54,7 @@ public class RouteController {
 
     @GetMapping("/routes")
     public ModelAndView routes(ModelAndView model){
-        final List<AllRoutesDTO> allRoutes = this.routeService.findAllRoutes();
+        final List<RouteAllDTO> allRoutes = this.routeService.findAllRoutes();
         model.addObject("routes", allRoutes);
         model.setViewName("routes");
         return model;
