@@ -1,6 +1,6 @@
 package com.dictionary.model.entity;
 
-import com.dictionary.model.dto.LanguageName;
+import com.dictionary.model.enums.LanguageName;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.dictionary.model.dto;
+package com.dictionary.model.enums;
 
 public enum LanguageName {
     GERMAN,

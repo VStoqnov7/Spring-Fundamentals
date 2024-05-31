@@ -1,6 +1,6 @@
 package com.dictionary.service.impl;
 
-import com.dictionary.model.dto.LanguageName;
+import com.dictionary.model.enums.LanguageName;
 import com.dictionary.model.entity.Language;
 import com.dictionary.repo.LanguageRepository;
 import com.dictionary.service.LanguageService;
