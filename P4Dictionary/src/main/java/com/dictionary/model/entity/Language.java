@@ -22,6 +22,14 @@ public class Language extends BaseEntity{
     private String description;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "language")
     private List<Word> words;
+
+    public Language() {
+    }
+    public Language(LanguageName languageName, String description) {
+        this.languageName = languageName;
+        this.description = description;
+    }
+
 }
