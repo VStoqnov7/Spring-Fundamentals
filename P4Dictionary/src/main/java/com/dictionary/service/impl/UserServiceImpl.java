@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findCurrendUser() {
+        return this.userRepository.findByUsername(this.currentUser.getUsername());
+    }
+
+    @Override
     public void loginUser(UserLoginDTO userLoginDTO) {
         this.currentUser.setUsername(userLoginDTO.getUsername());
         this.currentUser.setLoggedIn(true);

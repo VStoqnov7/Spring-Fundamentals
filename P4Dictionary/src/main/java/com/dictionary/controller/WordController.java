@@ -41,11 +41,12 @@ public class WordController {
                                  @Valid WordAddDTO wordAddDTO,
                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()){
+            model.addObject("languageValues", LanguageName.values());
             model.setViewName("word-add");
             return model;
         }
 
-//        this.wordService.saveWord(wordAddDTO);
+        this.wordService.saveWord(wordAddDTO);
 
         model.setViewName("redirect:/home");
         return model;

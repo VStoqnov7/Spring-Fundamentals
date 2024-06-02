@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -26,10 +27,10 @@ public class WordAddDTO {
     @Size(min = 2, max = 200,message = "The term length must be between 2 and 200 characters!")
     private String example;
 
-    @NotNull
+    @NotNull(message = "Must not be null!")
     @PastOrPresent(message = "The input date must be in the past or present!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date inputDate;
+    private LocalDate inputDate;
 
     @NotNull
     @NotEmpty(message = "You must select a language!")

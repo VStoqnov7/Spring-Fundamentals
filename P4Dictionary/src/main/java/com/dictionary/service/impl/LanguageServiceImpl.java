@@ -30,4 +30,11 @@ public class LanguageServiceImpl implements LanguageService {
             this.languageRepository.saveAllAndFlush(languageDataList);
         }
     }
+
+    @Override
+    public Language findLanguageByName(LanguageName language) {
+        return this.languageRepository.findByLanguageName(language);
+    }
+
+
 }

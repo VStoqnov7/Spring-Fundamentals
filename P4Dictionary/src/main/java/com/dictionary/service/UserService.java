@@ -9,6 +9,8 @@ public interface UserService {
 
     User findByUsername(String username);
 
+    User findCurrendUser();
+
     void loginUser(UserLoginDTO userLoginDTO);
 
 }
