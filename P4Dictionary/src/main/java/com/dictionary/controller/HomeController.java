@@ -29,6 +29,9 @@ public class HomeController {
         List<Word> italianWords = this.wordService.findAllItalianLanguage();
 
         model.addObject("germanWords",germanWords);
+        model.addObject("spanishWords",spanishWords);
+        model.addObject("frenchWords",frenchWords);
+        model.addObject("italianWords",italianWords);
         model.setViewName("home");
         return model;
     }
