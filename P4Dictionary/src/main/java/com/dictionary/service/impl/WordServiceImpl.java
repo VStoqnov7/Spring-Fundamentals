@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WordServiceImpl implements WordService {
@@ -57,5 +58,19 @@ public class WordServiceImpl implements WordService {
     @Override
     public List<Word> findAllItalianLanguage() {
         return this.wordRepository.findAllByLanguageLanguageName(LanguageName.ITALIAN);
+    }
+
+    @Override
+    public void removeWord(String wordId) {
+        Word wordById = this.wordRepository.findById(wordId).orElse(null);
+
+        if (wordById != null){
+            this.wordRepository.delete(wordById);
+        }
+    }
+
+    @Override
+    public void removeAllWords() {
+        this.wordRepository.deleteAll();
     }
 }

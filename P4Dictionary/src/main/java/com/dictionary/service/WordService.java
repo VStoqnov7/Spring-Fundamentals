@@ -16,4 +16,9 @@ public interface WordService {
     List<Word> findAllFrenchLanguage();
 
     List<Word> findAllItalianLanguage();
+
+    void removeWord(String wordId);
+
+    void removeAllWords();
+
 }
