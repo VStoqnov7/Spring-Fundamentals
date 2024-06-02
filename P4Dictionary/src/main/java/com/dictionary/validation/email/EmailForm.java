@@ -1,4 +1,4 @@
-package com.dictionary.validation;
+package com.dictionary.validation.email;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -8,12 +8,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {UniqueEmailValidator.class})
-public @interface UniqueEmail {
+@Target(ElementType.FIELD)
+@Constraint(validatedBy = EmailValidator.class)
+public @interface EmailForm {
 
-    String message() default "Email already exists";
+    String message() default "Invalid email";
 
     Class<?>[] groups() default {};
 

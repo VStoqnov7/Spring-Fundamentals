@@ -1,26 +1,28 @@
-package com.dictionary.validation;
+package com.dictionary.validation.uniqueEmail;
 
 import com.dictionary.repo.UserRepository;
+import com.dictionary.validation.uniqueEmail.UniqueEmail;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, String> {
+public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
+
 
     private final UserRepository userRepository;
     private String message;
 
-    public UniqueUsernameValidator(UserRepository userRepository) {
+    public UniqueEmailValidator(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public void initialize(UniqueUsername constraintAnnotation) {
+    public void initialize(UniqueEmail constraintAnnotation) {
         this.message = constraintAnnotation.message();
     }
 
     @Override
-    public boolean isValid(String username, ConstraintValidatorContext context) {
-        if (username != null && !userRepository.existsByUsername(username)) {
+    public boolean isValid(String email, ConstraintValidatorContext context) {
+        if (email != null && !userRepository.existsByEmail(email)) {
             return true;
         }
 

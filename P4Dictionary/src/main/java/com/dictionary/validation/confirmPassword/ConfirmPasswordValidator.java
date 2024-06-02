@@ -1,4 +1,4 @@
-package com.dictionary.validation;
+package com.dictionary.validation.confirmPassword;
 
 import com.dictionary.model.dto.UserRegistrationDTO;
 import jakarta.validation.ConstraintValidator;

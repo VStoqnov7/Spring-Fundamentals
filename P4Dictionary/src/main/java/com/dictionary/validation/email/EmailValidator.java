@@ -1,4 +1,4 @@
-package com.dictionary.validation;
+package com.dictionary.validation.email;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

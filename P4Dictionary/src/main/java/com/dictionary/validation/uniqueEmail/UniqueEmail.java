@@ -1,4 +1,4 @@
-package com.dictionary.validation;
+package com.dictionary.validation.uniqueEmail;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -10,10 +10,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {UniqueUsernameValidator.class})
-public @interface UniqueUsername {
+@Constraint(validatedBy = {UniqueEmailValidator.class})
+public @interface UniqueEmail {
 
-    String message() default "Username already exists";
+    String message() default "Email already exists";
 
     Class<?>[] groups() default {};
 

@@ -28,7 +28,7 @@
                     </li>
                 </th:block>
                 <th:block th:unless="${@currentUser.isAnonymous()}">
-                    <a class="nav-link h5 my-text-color">Welcome, {username}</a>
+                    <a class="nav-link h5 my-text-color" th:text=" 'Welcome, ' + ${@currentUser.username}">Welcome, {username}</a>
                     <li class="nav-item col-md-4">
                         <a class="nav-link my-text-color active h5 " href="/logout">Logout</a>
                     </li>

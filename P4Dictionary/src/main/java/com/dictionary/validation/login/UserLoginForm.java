@@ -1,5 +1,4 @@
-package com.dictionary.validation;
-
+package com.dictionary.validation.login;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -7,13 +6,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Constraint(validatedBy = ConfirmPasswordValidator.class)
-public @interface ConfirmPasswordForm {
+@Constraint(validatedBy = UserLoginValidator.class)
+public @interface UserLoginForm {
 
-    String message() default "Invalid password";
+    String message() default "Incorrect username or password!";
 
     Class<?>[] groups() default {};
 

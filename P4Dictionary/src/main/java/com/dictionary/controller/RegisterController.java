@@ -23,7 +23,7 @@ public class RegisterController {
 
 
     @ModelAttribute(name = "userRegistrationDTO")
-    public UserRegistrationDTO userLoginFormDto() {
+    public UserRegistrationDTO userRegisterForm() {
         return new UserRegistrationDTO();
     }
 
