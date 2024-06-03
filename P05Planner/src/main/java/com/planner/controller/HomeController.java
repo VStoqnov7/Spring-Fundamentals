@@ -15,10 +15,4 @@ public class HomeController {
         return model;
     }
 
-
-    @GetMapping("/addTask")
-    public ModelAndView addTask(ModelAndView model){
-        model.setViewName("task-add");
-        return model;
-    }
 }

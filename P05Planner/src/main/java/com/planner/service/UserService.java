@@ -10,4 +10,6 @@ public interface UserService {
     void loginUser(UserLoginDTO userLoginDTO);
 
     User findByUsername(String username);
+
+    User findCurrendUser();
 }

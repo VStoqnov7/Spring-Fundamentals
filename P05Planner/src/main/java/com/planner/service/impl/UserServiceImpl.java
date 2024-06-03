@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findByUsername(username);
     }
 
+    @Override
+    public User findCurrendUser() {
+        return this.userRepository.findByUsername(currentUser.getUsername());
+    }
+
 }

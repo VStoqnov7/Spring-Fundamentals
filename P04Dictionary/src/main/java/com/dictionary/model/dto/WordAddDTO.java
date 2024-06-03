@@ -1,6 +1,7 @@
 package com.dictionary.model.dto;
 
 import com.dictionary.model.entity.Language;
+import com.dictionary.model.enums.LanguageName;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -32,7 +33,6 @@ public class WordAddDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate inputDate;
 
-    @NotNull
-    @NotEmpty(message = "You must select a language!")
-    private String language;
+    @NotNull(message = "You must select a language!")
+    private LanguageName language;
 }

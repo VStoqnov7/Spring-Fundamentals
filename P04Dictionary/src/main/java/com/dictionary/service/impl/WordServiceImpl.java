@@ -35,7 +35,7 @@ public class WordServiceImpl implements WordService {
     public void saveWord(WordAddDTO wordAddDTO) {
         User user = userService.findCurrendUser();
         Word word = modelMapper.map(wordAddDTO, Word.class);
-        word.setLanguage(this.languageService.findLanguageByName(LanguageName.valueOf(wordAddDTO.getLanguage())));
+        word.setLanguage(this.languageService.findLanguageByName(wordAddDTO.getLanguage()));
         word.setAddedBy(user);
         this.wordRepository.saveAndFlush(word);
     }
