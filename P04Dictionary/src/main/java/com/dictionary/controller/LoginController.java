@@ -2,7 +2,6 @@ package com.dictionary.controller;
 
 import com.dictionary.model.dto.UserLoginDTO;
 import com.dictionary.service.UserService;
-import com.dictionary.validation.login.UserLoginForm;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

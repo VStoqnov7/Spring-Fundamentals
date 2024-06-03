@@ -1,6 +1,7 @@
 package com.dictionary.model.dto;
 
 
+import com.dictionary.validation.login.UserLoginForm;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@UserLoginForm
 public class UserLoginDTO {
 
     @NotNull(message = "Username cannot be empty!")

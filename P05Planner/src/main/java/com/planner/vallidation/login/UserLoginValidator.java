@@ -1,8 +1,8 @@
-package com.dictionary.validation.login;
+package com.planner.vallidation.login;
 
-import com.dictionary.model.dto.UserLoginDTO;
-import com.dictionary.model.entity.User;
-import com.dictionary.service.UserService;
+import com.planner.model.dtos.UserLoginDTO;
+import com.planner.model.entity.User;
+import com.planner.service.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
