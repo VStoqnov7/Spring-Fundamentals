@@ -13,21 +13,24 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-nav rounded">
         <a class="nav-link my-text-color active h5 " href="/">Planner App</a>
-        <a class="nav-link my-text-color active h5 " href="/">Add Task</a>
-
+        <th:block th:unless="${@currentUser.isAnonymous()}">
+            <a class="nav-link my-text-color active h5 " href="/user/addTask">Add Task</a>
+        </th:block>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
                 <li class="nav-item col-md-4">
-                    <a class="nav-link active h5 my-text-color" href="/">Login</a>
+                    <a class="nav-link active h5 my-text-color" href="/user/login">Login</a>
                 </li>
 
                 <li class="nav-item col-md-4">
-                    <a class="nav-link my-text-color active h5 " href="/">Register</a>
+                    <a class="nav-link my-text-color active h5 " href="/user/register">Register</a>
                 </li>
 
-                <li class="nav-item col-md-4">
-                    <a class="nav-link my-text-color active h5 " href="/">Logout</a>
-                </li>
+                <th:block th:unless="${@currentUser.isAnonymous()}">
+                    <li class="nav-item col-md-4">
+                        <a class="nav-link my-text-color active h5 " href="/user/logout">Logout</a>
+                    </li>
+                </th:block>
             </ul>
         </div>
     </nav>
