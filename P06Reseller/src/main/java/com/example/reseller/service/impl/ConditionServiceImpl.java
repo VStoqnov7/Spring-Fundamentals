@@ -27,4 +27,9 @@ public class ConditionServiceImpl implements ConditionService {
             this.conditionRepository.saveAllAndFlush(conditionsDataList);
         }
     }
+
+    @Override
+    public Condition findConditionByName(ConditionName condition) {
+        return this.conditionRepository.findByConditionName(condition);
+    }
 }

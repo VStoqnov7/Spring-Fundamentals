@@ -47,7 +47,7 @@ public class TaskController {
     }
 
     @PostMapping("/addTask")
-    public ModelAndView register(ModelAndView model,
+    public ModelAndView addTask(ModelAndView model,
                                  @Valid TaskAddDTO taskAddDTO,
                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()){
