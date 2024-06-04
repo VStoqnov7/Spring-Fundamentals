@@ -21,7 +21,8 @@
             <!--        <small class="invalid-feedback text-danger">Username error message</small>-->
 
             <input type="text" class="form-control" id="username" name="username"
-                   th:value="${userRegistrationDTO.username}" th:classappend="${#fields.hasErrors('username')} ? 'bg-danger' : ''"/>
+                   th:field="*{username}"
+                   th:classappend="${#fields.hasErrors('username')} ? 'bg-danger' : ''"/>
             <small class="text-danger"
                    th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error message</small>
         </div>
@@ -31,7 +32,7 @@
                 <label for="email" class="h4 mb-2">Email</label>
             </div>
             <input class="form-control" id="email" name="email"
-                   th:value="${userRegistrationDTO.email}" th:classappend="${#fields.hasErrors('email')} ? 'bg-danger' : ''"/>
+                   th:field="*{email}"  th:classappend="${#fields.hasErrors('email')} ? 'bg-danger' : ''"/>
             <small class="text-danger"
                    th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error message</small>
         </div>

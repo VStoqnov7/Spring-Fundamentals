@@ -10,4 +10,6 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, String> {
 
     List<Task> findAllByUserUsername(String username);
+
+    List<Task> findAllByUserIsNull();
 }

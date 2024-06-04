@@ -10,4 +10,10 @@ public interface TaskService {
     List<Task> findAllAssignedTasks();
 
     List<Task> findAllTasks();
+
+    void assignToMe(String taskId);
+
+    void returnTask(String taskId);
+
+    void doneTask(String taskId);
 }

@@ -7,11 +7,9 @@ import com.planner.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -23,6 +21,16 @@ public class TaskController {
 
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
+    }
+
+    @GetMapping()
+    public ModelAndView home(ModelAndView model){
+        List<Task> allAssignedTasks = this.taskService.findAllAssignedTasks();
+        List<Task> allTasks = this.taskService.findAllTasks();
+        model.addObject("allAssignedTasks",allAssignedTasks);
+        model.addObject("allTasks",allTasks);
+        model.setViewName("home");
+        return model;
     }
 
 
@@ -48,6 +56,27 @@ public class TaskController {
             return model;
         }
         this.taskService.saveTask(taskAddDTO);
+        model.setViewName("redirect:/home");
+        return model;
+    }
+
+    @GetMapping("/assignToMe/{taskId}")
+    public ModelAndView assignToMe(@PathVariable String taskId, ModelAndView model){
+        this.taskService.assignToMe(taskId);
+        model.setViewName("redirect:/home");
+        return model;
+    }
+
+    @GetMapping("/returnTask/{taskId}")
+    public ModelAndView returnTask(@PathVariable String taskId, ModelAndView model){
+        this.taskService.returnTask(taskId);
+        model.setViewName("redirect:/home");
+        return model;
+    }
+
+    @GetMapping("/doneTask/{taskId}")
+    public ModelAndView doneTask(@PathVariable String taskId, ModelAndView model){
+        this.taskService.doneTask(taskId);
         model.setViewName("redirect:/home");
         return model;
     }

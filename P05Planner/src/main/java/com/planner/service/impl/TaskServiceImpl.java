@@ -41,6 +41,33 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> findAllTasks() {
-        return this.taskRepository.findAll();
+        return this.taskRepository.findAllByUserIsNull();
+    }
+
+    @Override
+    public void assignToMe(String taskId) {
+        Task task = this.taskRepository.findById(taskId).orElse(null);
+        User user = this.userService.findCurrendUser();
+        if (task != null && user != null){
+            task.setUser(user);
+            taskRepository.saveAndFlush(task);
+        }
+    }
+
+    @Override
+    public void returnTask(String taskId) {
+        Task task = this.taskRepository.findById(taskId).orElse(null);
+        if (task != null){
+            task.setUser(null);
+            taskRepository.saveAndFlush(task);
+        }
+    }
+
+    @Override
+    public void doneTask(String taskId) {
+        Task task = this.taskRepository.findById(taskId).orElse(null);
+        if (task != null){
+            this.taskRepository.delete(task);
+        }
     }
 }
