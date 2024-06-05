@@ -13,4 +13,6 @@ public interface UserService {
 
     void loginUser(UserLoginDTO userLoginDTO);
 
+    void saveCurrentUser(User currentUser);
+
 }

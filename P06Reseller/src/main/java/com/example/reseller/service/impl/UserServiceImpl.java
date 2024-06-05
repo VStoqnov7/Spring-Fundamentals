@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService {
         this.currentUser.setUsername(userLoginDTO.getUsername());
         this.currentUser.setLoggedIn(true);
     }
+
+    @Override
+    public void saveCurrentUser(User currentUser) {
+        this.userRepository.saveAndFlush(currentUser);
+    }
 }

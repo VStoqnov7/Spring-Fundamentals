@@ -37,7 +37,7 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public List<Offer> findAllOtherOffers() {
-        return this.offerRepository.findAllByUserIdIsNot(this.userService.findCurrendUser().getId());
+        return this.offerRepository.findAllByUserIdIsNotAndUserIsNotNull(this.userService.findCurrendUser().getId());
     }
 
     @Override
@@ -48,5 +48,22 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public List<Offer> findAllBoughtItems() {
         return this.offerRepository.findBoughtOffersByUserId(this.userService.findCurrendUser().getId());
+    }
+
+    @Override
+    public void buyItem(String offerId) {
+        Offer offer = this.offerRepository.findById(offerId).orElse(null);
+        User currentUser = this.userService.findCurrendUser();
+        if (offer != null){
+            offer.setUser(null);
+            currentUser.getBoughtOffers().add(offer);
+        }
+        this.offerRepository.saveAndFlush(offer);
+        this.userService.saveCurrentUser(currentUser);
+    }
+
+    @Override
+    public void removeMyOffer(String offerId) {
+        this.offerRepository.deleteById(offerId);
     }
 }

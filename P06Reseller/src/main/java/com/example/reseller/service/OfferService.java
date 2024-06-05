@@ -13,4 +13,8 @@ public interface OfferService {
     List<Offer> findAllMyOffers();
 
     List<Offer> findAllBoughtItems();
+
+    void buyItem(String offerId);
+
+    void removeMyOffer(String offerId);
 }
