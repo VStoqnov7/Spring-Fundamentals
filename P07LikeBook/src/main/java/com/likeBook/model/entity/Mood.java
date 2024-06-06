@@ -21,4 +21,7 @@ public class Mood extends BaseEntity{
 
     @OneToMany(mappedBy = "mood", cascade = CascadeType.ALL)
     private Set<Post> posts;
+
+    public Mood(MoodName moodName) {
+    }
 }
