@@ -23,5 +23,9 @@ public class Mood extends BaseEntity{
     private Set<Post> posts;
 
     public Mood(MoodName moodName) {
+        this.moodName = moodName;
+    }
+
+    public Mood() {
     }
 }
