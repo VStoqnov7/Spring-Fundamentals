@@ -1,5 +1,6 @@
 package com.likeBook.service.impl;
 
+import com.likeBook.model.dtos.UserLoginDTO;
 import com.likeBook.model.dtos.UserRegistrationDTO;
 import com.likeBook.model.entity.User;
 import com.likeBook.model.user.CurrentUser;
@@ -28,5 +29,16 @@ public class UserServiceImpl implements UserService {
         User user = this.modelMapper.map(userRegistrationDTO,User.class);
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         this.userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return this.userRepository.findByUsername(username);
+    }
+
+    @Override
+    public void loginUser(UserLoginDTO userLoginDTO) {
+        this.currentUser.setUsername(userLoginDTO.getUsername());
+        this.currentUser.setLoggedIn(true);
     }
 }
