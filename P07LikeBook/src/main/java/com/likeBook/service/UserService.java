@@ -11,4 +11,5 @@ public interface UserService {
 
     void loginUser(UserLoginDTO userLoginDTO);
 
+    User findCurrentUser();
 }

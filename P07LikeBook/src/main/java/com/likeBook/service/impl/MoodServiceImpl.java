@@ -27,4 +27,9 @@ public class MoodServiceImpl implements MoodService {
             this.moodRepository.saveAllAndFlush(prioritiesDataList);
         }
     }
+
+    @Override
+    public Mood findMoodByName(MoodName mood) {
+        return this.moodRepository.findByMoodName(mood);
+    }
 }

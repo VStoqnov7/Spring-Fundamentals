@@ -21,7 +21,6 @@ public class Post extends BaseEntity{
     @ManyToMany
     private Set<User> userLikes;
 
-
     @ManyToOne
     private Mood mood;
 }
