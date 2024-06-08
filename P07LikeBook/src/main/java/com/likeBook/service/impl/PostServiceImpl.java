@@ -10,12 +10,15 @@ import com.likeBook.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
     private final UserService userService;
     private final MoodService moodService;
+
     public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, UserService userService, MoodService moodService) {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
@@ -30,5 +33,30 @@ public class PostServiceImpl implements PostService {
         User user = userService.findCurrentUser();
         post.setUser(user);
         this.postRepository.save(post);
+    }
+
+    @Override
+    public List<Post> findAllPosts() {
+        return this.postRepository.findAllByUserUsernameIsNot(this.userService.findCurrentUser().getUsername());
+    }
+
+    @Override
+    public List<Post> findAllMyPosts() {
+        return this.postRepository.findAllByUserUsername(this.userService.findCurrentUser().getUsername());
+    }
+
+    @Override
+    public void removePost(String postId) {
+        this.postRepository.deleteById(postId);
+    }
+
+    @Override
+    public void likePost(String postId) {
+        Post post = postRepository.findById(postId).orElse(null);
+        if (post != null) {
+            User user = this.userService.findCurrentUser();
+            post.getUserLikes().add(user);
+            postRepository.saveAndFlush(post);
+        }
     }
 }
