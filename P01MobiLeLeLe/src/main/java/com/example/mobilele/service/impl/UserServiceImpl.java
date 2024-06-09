@@ -1,86 +1,56 @@
 package com.example.mobilele.service.impl;
 
-import com.example.mobilele.models.beans.LoggedUser;
-import com.example.mobilele.models.dto.UserDto;
-import com.example.mobilele.models.dto.UserLoginDto;
+import com.example.mobilele.models.dto.UserLoginDTO;
+import com.example.mobilele.models.dto.UserRegistrationDTO;
 import com.example.mobilele.models.entity.User;
-import com.example.mobilele.models.entity.UserRole;
-import com.example.mobilele.models.enums.Role;
+import com.example.mobilele.models.user.CurrentUser;
 import com.example.mobilele.repository.UserRepository;
 import com.example.mobilele.service.UserService;
-import com.example.mobilele.util.MyValidator;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final MyValidator validator;
     private final PasswordEncoder passwordEncoder;
-    private final LoggedUser loggedUser;
+    private final CurrentUser currentUser;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, MyValidator validator, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-        this.validator = validator;
         this.passwordEncoder = passwordEncoder;
-        this.loggedUser = loggedUser;
+        this.currentUser = currentUser;
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
-        User user = modelMapper.map(userDto, User.class);
-        UserRole userRole = new UserRole();
-        userRole.setName(this.userRepository.count() > 0 ? Role.USER : Role.ADMIN);
-        if (validator.isValid(userDto)) {
-            user.setCreated(LocalDateTime.now());
-            user.setRole(userRole);
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-            this.userRepository.saveAndFlush(user);
-        } else {
-            validator.validate(userDto).forEach(System.out::println);
-
-        }
+    public void saveUser(UserRegistrationDTO userRegistrationDTO) {
+        User user = this.modelMapper.map(userRegistrationDTO,User.class);
+        user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
+        user.setCreated(LocalDateTime.now());
+        this.userRepository.saveAndFlush(user);
     }
 
     @Override
-    public boolean checkUserLogin(UserLoginDto userDto) {
-        User existingUser = userRepository.findByUsername(userDto.getUsername());
-        if (existingUser != null && passwordEncoder.matches(userDto.getPassword(), existingUser.getPassword())) {
-            existingUser.setActive(true);
-            this.userRepository.saveAndFlush(existingUser);
-            this.loggedUser
-                    .setId(existingUser.getId())
-                    .setUsername(existingUser.getUsername())
-                    .setRole(existingUser.getRole().getName());
-            return true;
-        } else {
-            return false;
-        }
+    public void loginUser(UserLoginDTO userLoginDTO) {
+        this.currentUser.setUsername(userLoginDTO.getUsername());
+        this.currentUser.setLoggedIn(true);
     }
 
     @Override
-    public void logout() {
-        User existingUser = userRepository.findByUsername(loggedUser.getUsername());
-        existingUser.setActive(false);
-        this.userRepository.saveAndFlush(existingUser);
-        this.loggedUser.clearFields();
-    }
-
-
-    @Override
-    public boolean existUser(UserDto userDto) {
-        return userRepository.findByUsername(userDto.getUsername()) != null;
+    public User findByUsername(String username) {
+        return this.userRepository.findByUsername(username);
     }
 
     @Override
-    public User getUserById(String id) {
-        return this.userRepository.findById(id).orElse(null);
+    public User findCurrendUser() {
+        return this.userRepository.findByUsername(currentUser.getUsername());
     }
 }

@@ -1,19 +1,20 @@
 package com.example.mobilele.service;
 
-import com.example.mobilele.models.dto.OfferDto;
-import com.example.mobilele.models.dto.UserLoginDto;
+import com.example.mobilele.models.dto.OfferAddDTO;
 import com.example.mobilele.models.entity.Offer;
 
 import java.util.List;
 
 public interface OfferService {
-    void addOffer(OfferDto offerDto, UserLoginDto userLoginDto);
 
-    List<Offer> getAllOffers();
+    void saveOffer(OfferAddDTO offerAddDTO);
 
-    Offer getOfferById(String id);
+    List<Offer> allOffers();
 
-    void updateOffer(OfferDto updatedOfferDto, String offerId);
+
+    Offer findOfferById(String offerId);
+
+    void updateOffer(String offerId, OfferAddDTO offerAddDTO);
 
     void deleteOffer(String offerId);
 }

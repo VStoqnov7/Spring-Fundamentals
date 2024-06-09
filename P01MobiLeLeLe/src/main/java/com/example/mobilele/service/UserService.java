@@ -1,19 +1,18 @@
 package com.example.mobilele.service;
 
-import com.example.mobilele.models.dto.UserDto;
-import com.example.mobilele.models.dto.UserLoginDto;
+import com.example.mobilele.models.dto.UserLoginDTO;
+import com.example.mobilele.models.dto.UserRegistrationDTO;
 import com.example.mobilele.models.entity.User;
 
+
 public interface UserService {
-    void saveUser(UserDto userDto);
+    void saveUser(UserRegistrationDTO userRegistrationDTO);
 
-    boolean checkUserLogin(UserLoginDto userDto);
+    void loginUser(UserLoginDTO userLoginDTO);
 
-    void logout();
+    User findByUsername(String username);
 
-    boolean existUser(UserDto userDto);
-
-    User getUserById(String id);
+    User findCurrendUser();
 }
 
 

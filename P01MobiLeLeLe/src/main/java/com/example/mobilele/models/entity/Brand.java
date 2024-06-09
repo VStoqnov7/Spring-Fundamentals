@@ -2,6 +2,8 @@ package com.example.mobilele.models.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Accessors(chain = true)
 @Entity
 @Table(name = "brands")
 public class Brand extends BaseEntity{

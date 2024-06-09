@@ -4,12 +4,15 @@ package com.example.mobilele.models.entity;
 import com.example.mobilele.models.enums.Category;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
+@Accessors(chain = true)
 @Entity
 @Table(name = "models")
 public class Model extends BaseEntity{
@@ -38,4 +41,7 @@ public class Model extends BaseEntity{
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Brand brand;
+
+    @OneToMany(mappedBy = "model")
+    private List<Offer> offers;
 }
