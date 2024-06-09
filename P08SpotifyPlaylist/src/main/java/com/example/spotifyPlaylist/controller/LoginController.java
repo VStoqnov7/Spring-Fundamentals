@@ -1,7 +1,7 @@
-package com.planner.controller;
+package com.example.spotifyPlaylist.controller;
 
-import com.planner.model.dtos.UserLoginDTO;
-import com.planner.service.UserService;
+import com.example.spotifyPlaylist.model.dtos.UserLoginDTO;
+import com.example.spotifyPlaylist.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

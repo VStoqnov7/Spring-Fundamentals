@@ -1,5 +1,6 @@
 package com.example.spotifyPlaylist.service.impl;
 
+import com.example.spotifyPlaylist.model.dtos.UserLoginDTO;
 import com.example.spotifyPlaylist.model.dtos.UserRegistrationDTO;
 import com.example.spotifyPlaylist.model.entity.User;
 import com.example.spotifyPlaylist.model.user.CurrentUser;
@@ -31,6 +32,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void loginUser(UserLoginDTO userLoginDTO) {
+        this.currentUser.setUsername(userLoginDTO.getUsername());
+        this.currentUser.setLoggedIn(true);
+    }
+
+    @Override
     public User findByUsername(String username) {
         return this.userRepository.findByUsername(username);
     }
@@ -39,4 +46,5 @@ public class UserServiceImpl implements UserService {
     public User findCurrendUser() {
         return this.userRepository.findByUsername(currentUser.getUsername());
     }
+
 }
