@@ -5,6 +5,7 @@
 <body>
 <header th:replace="fragments/commons::nav"></header>
 <main>
+    <th:block th:if="${@currentUser.isAnonymous()}">
     <div class="container bg-blur rounded mt-5 ">
         <h1>Welcome to Spotify Playlist App</h1>
         <hr class="my-3 bg-white w-50"/>
@@ -18,12 +19,13 @@
         <hr class="my-3 bg-white w-75"/>
 
         <h3>
-            <a class="text-primary" href="/">Login</a>
+            <a class="text-primary" href="/user/login">Login</a>
             if you have an account or
-            <a class="text-primary" href="/">Register</a>
+            <a class="text-primary" href="/user/register">Register</a>
             now and check our deals.
         </h3>
     </div>
+    </th:block>
 </main>
 <footer th:replace="fragments/commons::footer"></footer>
 </body>

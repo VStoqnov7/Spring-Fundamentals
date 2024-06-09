@@ -12,13 +12,18 @@ import java.util.List;
 @Table(name = "styles")
 public class Style extends BaseEntity{
 
-
     @Column(unique = true, nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private StyleName styleName;
 
     private String description;
 
     @OneToMany(mappedBy = "style")
     private List<Song> songs;
+
+    public Style(StyleName styleName) {
+        this.styleName = styleName;
+    }
+    public Style() {
+    }
 }
