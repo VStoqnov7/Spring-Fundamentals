@@ -24,6 +24,7 @@ public class Style extends BaseEntity{
     public Style(StyleName styleName) {
         this.styleName = styleName;
     }
+
     public Style() {
     }
 }

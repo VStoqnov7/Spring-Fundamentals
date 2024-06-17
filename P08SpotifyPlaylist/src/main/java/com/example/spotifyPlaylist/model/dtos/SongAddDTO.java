@@ -1,10 +1,7 @@
 package com.example.spotifyPlaylist.model.dtos;
 
 import com.example.spotifyPlaylist.model.enums.StyleName;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +24,7 @@ public class SongAddDTO {
     private Integer duration;
 
     @NotNull(message = "Release Date cannot be empty!")
-    @Future(message = "Release Date must be in future!")
+    @PastOrPresent(message = "The Date cannot be in the future!")
     private LocalDate releaseDate;
 
     @NotNull(message = "You must select a style!")

@@ -2,11 +2,16 @@ package com.example.spotifyPlaylist.service.impl;
 
 import com.example.spotifyPlaylist.model.dtos.SongAddDTO;
 import com.example.spotifyPlaylist.model.entity.Song;
+import com.example.spotifyPlaylist.model.entity.User;
+import com.example.spotifyPlaylist.model.enums.StyleName;
 import com.example.spotifyPlaylist.repository.SongRepository;
 import com.example.spotifyPlaylist.service.SongService;
 import com.example.spotifyPlaylist.service.StyleService;
+import com.example.spotifyPlaylist.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -14,11 +19,13 @@ public class SongServiceImpl implements SongService {
     private final SongRepository songRepository;
     private final ModelMapper modelMapper;
     private final StyleService styleService;
+    private final UserService userService;
 
-    public SongServiceImpl(SongRepository songRepository, ModelMapper modelMapper, StyleService styleService) {
+    public SongServiceImpl(SongRepository songRepository, ModelMapper modelMapper, StyleService styleService, UserService userService) {
         this.songRepository = songRepository;
         this.modelMapper = modelMapper;
         this.styleService = styleService;
+        this.userService = userService;
     }
 
 
@@ -27,5 +34,25 @@ public class SongServiceImpl implements SongService {
         Song song = modelMapper.map(songAddDTO,Song.class);
         song.setStyle(this.styleService.findStyleByName(songAddDTO.getStyle()));
         this.songRepository.saveAndFlush(song);
+    }
+
+    @Override
+    public List<Song> findAllPopSongs() {
+        return this.songRepository.findByStyle(this.styleService.findStyleByName(StyleName.POP));
+    }
+
+    @Override
+    public List<Song> findAllRockSongs() {
+        return this.songRepository.findByStyle(this.styleService.findStyleByName(StyleName.ROCK));
+    }
+
+    @Override
+    public List<Song> findAllJazzSongs() {
+        return this.songRepository.findByStyle(this.styleService.findStyleByName(StyleName.JAZZ));
+    }
+
+    @Override
+    public List<Song> findAllMySongs() {
+        return this.userService.findCurrendUser().getPlayList();
     }
 }

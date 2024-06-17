@@ -1,6 +1,7 @@
 package com.example.spotifyPlaylist.controller;
 
 import com.example.spotifyPlaylist.model.dtos.SongAddDTO;
+import com.example.spotifyPlaylist.model.entity.Song;
 import com.example.spotifyPlaylist.model.enums.StyleName;
 import com.example.spotifyPlaylist.service.SongService;
 import jakarta.validation.Valid;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/home")
@@ -24,6 +27,14 @@ public class SongController {
 
     @GetMapping()
     public ModelAndView home(ModelAndView model){
+        List<Song> popSongs = this.songService.findAllPopSongs();
+        List<Song> rockSongs = this.songService.findAllRockSongs();
+        List<Song> jazzSongs = this.songService.findAllJazzSongs();
+        List<Song> mySongs = this.songService.findAllMySongs();
+        model.addObject("popSongs",popSongs);
+        model.addObject("rockSongs",rockSongs);
+        model.addObject("jazzSongs",jazzSongs);
+        model.addObject("mySongs",mySongs);
         model.setViewName("home");
         return model;
     }
@@ -55,7 +66,4 @@ public class SongController {
         model.setViewName("redirect:/home");
         return model;
     }
-
-
-
 }
