@@ -8,10 +8,7 @@ import com.dictionary.service.WordService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -52,5 +49,17 @@ public class WordController {
         return model;
     }
 
+    @GetMapping("/removeWord/{wordId}")
+    public ModelAndView removeWord(@PathVariable String wordId, ModelAndView model){
+        this.wordService.removeWord(wordId);
+        model.setViewName("redirect:/home");
+        return model;
+    }
 
+    @GetMapping("/removeAllWords")
+    public ModelAndView removeAllWords(ModelAndView model){
+        this.wordService.removeAllWords();
+        model.setViewName("redirect:/home");
+        return model;
+    }
 }

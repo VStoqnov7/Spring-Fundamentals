@@ -28,4 +28,9 @@ public class StyleServiceImpl implements StyleService {
             this.styleRepository.saveAllAndFlush(stylesDataList);
         }
     }
+
+    @Override
+    public Style findStyleByName(StyleName styleName) {
+        return this.styleRepository.findByStyleName(styleName);
+    }
 }

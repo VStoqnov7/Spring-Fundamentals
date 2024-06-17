@@ -35,6 +35,4 @@ public class LanguageServiceImpl implements LanguageService {
     public Language findLanguageByName(LanguageName language) {
         return this.languageRepository.findByLanguageName(language);
     }
-
-
 }

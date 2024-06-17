@@ -5,9 +5,7 @@ package com.dictionary.controller;
 import com.dictionary.model.entity.Word;
 import com.dictionary.service.WordService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,21 +35,6 @@ public class HomeController {
         model.addObject("italianWords",italianWords);
         model.addObject("allWordsCount", allWordsCount);
         model.setViewName("home");
-        return model;
-    }
-
-
-    @GetMapping("/removeWord/{wordId}")
-    public ModelAndView removeWord(@PathVariable String wordId, ModelAndView model){
-        this.wordService.removeWord(wordId);
-        model.setViewName("redirect:/home");
-        return model;
-    }
-
-    @GetMapping("/removeAllWords")
-    public ModelAndView removeAllWords(ModelAndView model){
-        this.wordService.removeAllWords();
-        model.setViewName("redirect:/home");
         return model;
     }
 }

@@ -27,6 +27,7 @@ public class Language extends BaseEntity{
 
     public Language() {
     }
+
     public Language(LanguageName languageName, String description) {
         this.languageName = languageName;
         this.description = description;
