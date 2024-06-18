@@ -1,6 +1,7 @@
 package com.example.shopping.model.dtos;
 
 import com.example.shopping.model.enums.CategoryName;
+import com.example.shopping.validation.uniqueProductName.UniqueProductName;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 public class ProductAddDTO {
 
+    @UniqueProductName
     @NotNull(message = "Name cannot be empty!")
     @Size(min = 3, max = 20, message = "Name length must be between 3 and 20 characters!")
     private String name;
