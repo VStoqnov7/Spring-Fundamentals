@@ -15,4 +15,6 @@ public interface SongService {
     List<Song> findAllJazzSongs();
 
     List<Song> findAllMySongs();
+
+    void addToMyPlaylist(Long songId);
 }

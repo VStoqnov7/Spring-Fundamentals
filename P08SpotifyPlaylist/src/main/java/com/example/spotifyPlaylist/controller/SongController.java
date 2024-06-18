@@ -7,13 +7,11 @@ import com.example.spotifyPlaylist.service.SongService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/home")
@@ -63,6 +61,13 @@ public class SongController {
         }
 
         this.songService.saveSong(songAddDTO);
+        model.setViewName("redirect:/home");
+        return model;
+    }
+
+    @GetMapping("/addToMyPlaylist/{songId}")
+    public ModelAndView addToMyPlaylist(@PathVariable Long songId, ModelAndView model){
+        this.songService.addToMyPlaylist(songId);
         model.setViewName("redirect:/home");
         return model;
     }

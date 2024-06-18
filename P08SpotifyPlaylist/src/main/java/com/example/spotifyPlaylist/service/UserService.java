@@ -13,5 +13,6 @@ public interface UserService {
 
     void loginUser(UserLoginDTO userLoginDTO);
 
+    void saveUserWithSongs(User user);
 }
 

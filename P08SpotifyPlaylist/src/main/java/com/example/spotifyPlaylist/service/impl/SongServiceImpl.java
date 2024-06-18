@@ -12,6 +12,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -31,7 +33,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public void saveSong(SongAddDTO songAddDTO) {
-        Song song = modelMapper.map(songAddDTO,Song.class);
+        Song song = modelMapper.map(songAddDTO, Song.class);
         song.setStyle(this.styleService.findStyleByName(songAddDTO.getStyle()));
         this.songRepository.saveAndFlush(song);
     }
@@ -54,5 +56,15 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> findAllMySongs() {
         return this.userService.findCurrendUser().getPlayList();
+    }
+
+    @Override
+    public void addToMyPlaylist(Long songId) {
+        Optional<Song> song = this.songRepository.findById(songId);
+        User user = this.userService.findCurrendUser();
+        if (song.isPresent() && !user.getPlayList().contains(song.get())) {
+            user.getPlayList().add(song.get());
+            this.userService.saveUserWithSongs(user);
+        }
     }
 }

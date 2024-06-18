@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveUserWithSongs(User user) {
+        this.userRepository.saveAndFlush(user);
+    }
+
+    @Override
     public User findByUsername(String username) {
         return this.userRepository.findByUsername(username);
     }
