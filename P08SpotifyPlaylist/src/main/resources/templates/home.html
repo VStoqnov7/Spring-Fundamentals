@@ -40,7 +40,8 @@
             <div class="col-6 mt-1 mb-1">
                 <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">My Playlist</h3>
 
-                <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">{totalDurationOfPlaylist} min. total</h6>
+                <h6 class="mySticky bg-gray text-dark  mb-0 mt-0"
+                    th:text="${(totalMinutes div 60) + ':' + (#strings.length((totalMinutes % 60)) lt 2 ? '0' + (totalMinutes % 60) : (totalMinutes % 60)) + ' min. total'}">{totalDurationOfPlaylist} min. total</h6>
 
                 <div class="bg-dark rounded m-auto" style="height: 68.5vh; overflow: auto">
                     <table class="table table-striped table-dark" th:each="mySong : ${mySongs}">
@@ -53,7 +54,7 @@
                     </table>
                 </div>
 
-                <a href="/" class="mt-1 mb-0 btn btn-danger">Remove all</a>
+                <a th:href="@{/home/removeAllMySongs}" class="mt-1 mb-0 btn btn-danger">Remove all</a>
             
             </div>
         </div>

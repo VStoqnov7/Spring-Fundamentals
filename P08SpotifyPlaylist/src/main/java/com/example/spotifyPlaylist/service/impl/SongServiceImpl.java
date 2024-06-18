@@ -67,4 +67,11 @@ public class SongServiceImpl implements SongService {
             this.userService.saveUserWithSongs(user);
         }
     }
+
+    @Override
+    public void removeAllMySongs() {
+        User user = this.userService.findCurrendUser();
+        user.getPlayList().clear();
+        this.userService.saveUserWithSongs(user);
+    }
 }

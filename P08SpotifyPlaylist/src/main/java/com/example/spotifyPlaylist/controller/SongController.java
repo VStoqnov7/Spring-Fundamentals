@@ -29,10 +29,14 @@ public class SongController {
         List<Song> rockSongs = this.songService.findAllRockSongs();
         List<Song> jazzSongs = this.songService.findAllJazzSongs();
         List<Song> mySongs = this.songService.findAllMySongs();
+        int totalMinutes = mySongs.stream()
+                .mapToInt(Song::getDuration)
+                .sum();
         model.addObject("popSongs",popSongs);
         model.addObject("rockSongs",rockSongs);
         model.addObject("jazzSongs",jazzSongs);
         model.addObject("mySongs",mySongs);
+        model.addObject("totalMinutes",totalMinutes);
         model.setViewName("home");
         return model;
     }
@@ -68,6 +72,13 @@ public class SongController {
     @GetMapping("/addToMyPlaylist/{songId}")
     public ModelAndView addToMyPlaylist(@PathVariable Long songId, ModelAndView model){
         this.songService.addToMyPlaylist(songId);
+        model.setViewName("redirect:/home");
+        return model;
+    }
+
+    @GetMapping("/removeAllMySongs")
+    public ModelAndView removeAllMySongs(ModelAndView model){
+        this.songService.removeAllMySongs();
         model.setViewName("redirect:/home");
         return model;
     }

@@ -17,4 +17,7 @@ public interface SongService {
     List<Song> findAllMySongs();
 
     void addToMyPlaylist(Long songId);
+
+    void removeAllMySongs();
+
 }
