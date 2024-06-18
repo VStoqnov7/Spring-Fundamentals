@@ -19,7 +19,7 @@ public class Product extends BaseEntity{
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
@@ -30,6 +30,4 @@ public class Product extends BaseEntity{
 
     @ManyToOne
     private Category category;
-
-
 }

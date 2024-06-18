@@ -1,8 +1,7 @@
 package com.example.shopping.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.example.shopping.model.enums.CategoryName;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +12,16 @@ import lombok.Setter;
 public class Category extends BaseEntity{
 
     @Column(unique = true, nullable = false)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private CategoryName name;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
+
+    public Category(CategoryName categoryName) {
+        this.name = categoryName;
+    }
+
+    public Category() {
+    }
 }
